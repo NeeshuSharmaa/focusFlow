@@ -1,9 +1,13 @@
+import { useState } from "react";
 import "./Home.css";
-import { created } from "../../features/createTaskSlice";
-import { useDispatch } from "react-redux";
+
+import TaskModal from "../../components/taskModal/TaskModal";
+import { useSelector } from "react-redux";
 
 export default function Home() {
-  const dispatch = useDispatch();
+  const [showTaskModal, setShowTaskModal] = useState(false);
+  const tasks = useSelector((state) => state.tasks.allTasks);
+  console.log(tasks);
   return (
     <div className="home">
       <section className="summary">
@@ -31,7 +35,7 @@ export default function Home() {
           <small>Completed Tasks</small>
         </div>
       </section>
-      <button>
+      <button onClick={() => setShowTaskModal(true)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -48,7 +52,15 @@ export default function Home() {
         </svg>
         <span>Track New Task</span>
       </button>
-      <section className="tasks-list"></section>
+      <section className="tasks-list">
+        {tasks.map((task) => (
+          <span key={task.id}>{task.name}</span>
+        ))}
+      </section>
+      <TaskModal
+        setShowTaskModal={setShowTaskModal}
+        showTaskModal={showTaskModal}
+      />
     </div>
   );
 }

@@ -15,6 +15,9 @@ a {
   cursor: pointer;
   color: inherit;
 }
+button {
+  cursor: pointer;
+}
 .main {
   display: grid;
   grid-template-columns: auto 80%;

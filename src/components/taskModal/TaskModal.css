@@ -1,0 +1,70 @@
+.modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 6;
+}
+.model-content {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  box-shadow: 3px 3px 7px rgb(100, 99, 99);
+}
+.modal-header {
+  padding: 2rem;
+
+  border-bottom: 1px solid lightGray;
+}
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem;
+}
+.modal-body > input,
+.modal-body > div > input,
+select,
+textarea {
+  padding: 0.8rem 1rem;
+  border: 1px solid lightgray;
+}
+.modal-body > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+.modal > input:focus,
+.modal-body > div > input:focus,
+select:focus,
+textarea:focus {
+  outline: 1px solid var(--primary-blue);
+}
+option:invalid {
+  color: rgb(245, 245, 245);
+}
+.modal-body > textarea {
+  resize: none;
+}
+.modal-footer {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid lightGray;
+}
+.modal-footer > span:first-child {
+  color: var(--primary-blue);
+  cursor: pointer;
+}
+
+.modal-footer > span:nth-child(2),
+.modal-footer > span:nth-child(3) {
+  color: rgb(101, 101, 101);
+  cursor: pointer;
+}
