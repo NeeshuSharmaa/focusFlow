@@ -8,6 +8,7 @@
   --light-gray-bg: rgb(245, 245, 245);
   /* --primary-black: #2b3440; */
   --primary-black: lightslategray;
+  --secondary-black: rgb(82, 95, 108);
   font-family: "Poppins", sans-serif;
 }
 a {
@@ -27,9 +28,9 @@ nav {
   position: sticky;
   top: 0;
   height: 100px;
-  padding: 1rem;
+  padding: 0 3rem;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   background-color: white;
   box-shadow: 1px 4px 4px whitesmoke;
   z-index: 5;
@@ -44,4 +45,47 @@ nav {
 .logo > img {
   width: 40px;
   height: 40px;
+}
+.primary-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 2rem;
+  border: 0;
+  border-radius: 1.5rem;
+  background-color: var(--primary-blue);
+  color: white;
+  width: max-content;
+  align-self: flex-end;
+}
+.secondary-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 2rem;
+  color: var(--primary-blue);
+  background-color: white;
+  border-radius: 1.5rem;
+  border: 0.2rem solid var(--primary-blue);
+}
+.flex-row-2 {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.primary-btn > .fa-icon,
+.secondary-btn > .fa-icon {
+  width: 20px;
+  height: 20px;
+}
+.outside-click {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.toast {
+  border-radius: 0.2rem;
 }
