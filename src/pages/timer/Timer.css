@@ -1,0 +1,41 @@
+.timer-pomodoro,
+.stopwatch {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--light-gray-bg);
+  align-items: center;
+  gap: 3rem;
+}
+.timer-pomodoro > span,
+.stopwatch > span {
+  padding: 0.8rem 2.5rem;
+  background-color: white;
+  width: max-content;
+  border-radius: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  color: var(--primary-black);
+}
+
+.circular-bar {
+  width: 400px;
+  height: 400px;
+  align-self: center;
+}
+.timer-pomodoro > .primary-btn,
+.stopwatch > .primary-btn {
+  align-self: center;
+}
+.timer-pomodoro > .primary-btn > .fa-icon,
+.stopwatch > .primary-btn > .fa-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.stopwatch > .time {
+  color: var(--primary-black);
+  font-size: 6rem;
+  font-family: "Fjalla One", sans-serif;
+}
