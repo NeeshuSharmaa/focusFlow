@@ -3,11 +3,10 @@ import "react-circular-progressbar/dist/styles.css";
 import "./Timer.css";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import { useEffect, useState } from "react";
 
 import Button from "./Button";
+import StopTimerModal from "./stopTimerModal";
 
 export default function Pomodoro() {
   const { id: ID } = useParams();
@@ -17,6 +16,7 @@ export default function Pomodoro() {
 
   const [time, setTime] = useState(25 * 60);
   const [timerIsActive, setTimerIsActive] = useState(false);
+  const [stopActive, setStopActive] = useState(false);
 
   const PomodoroDisplay = () => {
     return (
@@ -54,19 +54,25 @@ export default function Pomodoro() {
 
   return (
     <div className="timer-pomodoro">
-      <span>
-        <FontAwesomeIcon icon={faCircle} />
-        {taskToTrack?.name}
-      </span>
+      <span>{taskToTrack?.name}</span>
       <PomodoroDisplay />
 
       <Button
-        timerIsActive={timerIsActive}
-        setTimerIsActive={setTimerIsActive}
         time={time}
         setTime={setTime}
         initialTime={25 * 60}
+        timerIsActive={timerIsActive}
+        setTimerIsActive={setTimerIsActive}
+        setStopActive={setStopActive}
       />
+      {stopActive && (
+        <StopTimerModal
+          setStopActive={setStopActive}
+          setTimerIsActive={setTimerIsActive}
+          setTime={setTime}
+          initialTime={25 * 60}
+        />
+      )}
     </div>
   );
 }

@@ -8,6 +8,7 @@ import {
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import Button from "./Button";
+import StopTimerModal from "./stopTimerModal";
 
 export default function Stopwatch() {
   const { id: ID } = useParams();
@@ -17,6 +18,7 @@ export default function Stopwatch() {
 
   const [time, setTime] = useState(0);
   const [timerIsActive, setTimerIsActive] = useState(false);
+  const [stopActive, setStopActive] = useState(false);
 
   const getTime = () => {
     const hr = Math.floor(time / 3600);
@@ -51,6 +53,14 @@ export default function Stopwatch() {
         setTime={setTime}
         initialTime={0}
       />
+      {stopActive && (
+        <StopTimerModal
+          setStopActive={setStopActive}
+          setTimerIsActive={setTimerIsActive}
+          setTime={setTime}
+          initialTime={25 * 60}
+        />
+      )}
     </div>
   );
 }

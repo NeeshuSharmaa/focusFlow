@@ -4,7 +4,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faCirclePause } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function Button({
@@ -13,12 +13,14 @@ export default function Button({
   time,
   setTime,
   initialTime,
+  setStopActive,
 }) {
   const isPomodoro = useSelector((state) => state.tasks.isPomodoro);
   const stopTimer = () => {
+    setStopActive(true);
     setTimerIsActive(false);
-    setTime(initialTime);
   };
+
   return (
     <>
       {!timerIsActive && time === initialTime && (
@@ -31,13 +33,19 @@ export default function Button({
         </button>
       )}
       {timerIsActive && (
-        <button
-          className="primary-btn"
-          onClick={() => setTimerIsActive((active) => !active)}
-        >
-          <FontAwesomeIcon icon={faCirclePause} className="fa-icon" />
-          <span>{isPomodoro ? "Take a break" : "Pause"}</span>
-        </button>
+        <div className="flex-row-2">
+          <button
+            className="primary-btn"
+            onClick={() => setTimerIsActive((active) => !active)}
+          >
+            <FontAwesomeIcon icon={faCirclePause} className="fa-icon" />
+            <span>{isPomodoro ? "Take a break" : "Pause"}</span>
+          </button>
+          <button className="secondary-btn" onClick={stopTimer}>
+            <FontAwesomeIcon icon={faCircleStop} className="fa-icon" />
+            <span>Stop</span>
+          </button>
+        </div>
       )}
 
       {!timerIsActive && time !== initialTime && (

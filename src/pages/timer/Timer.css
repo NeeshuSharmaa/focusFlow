@@ -39,3 +39,39 @@
   font-size: 6rem;
   font-family: "Fjalla One", sans-serif;
 }
+
+.stop-active-modal {
+  gap: 1rem;
+}
+.stop-active-modal > div:first-child {
+  padding: 1.25rem 3rem 0 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.stop-active-modal > div:first-child > small {
+  color: var(--primary-black);
+}
+.stop-active-modal > .actions {
+  display: flex;
+  flex-direction: column;
+}
+.stop-active-modal > .actions > div {
+  width: 100%;
+  padding: 1rem 3rem;
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+.stop-active-modal > .actions > div:hover {
+  background-color: whitesmoke;
+  color: var(--primary-blue);
+  cursor: pointer;
+}
+.stop-active-modal > .actions > div:first-child,
+.stop-active-modal > .actions > div:nth-child(2) {
+  border-bottom: 0.5px solid lightgray;
+}
+.stop-active-modal > .actions > div:nth-child(3) {
+  padding-bottom: 1.25rem;
+}
