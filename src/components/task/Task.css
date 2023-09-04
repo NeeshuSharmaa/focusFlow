@@ -1,0 +1,57 @@
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  color: var(--primary-black);
+}
+.task > div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.task > span {
+  color: var(--primary-black);
+}
+
+.timers-modal-outer {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 6;
+}
+
+.timers-modal {
+  position: relative;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  box-shadow: 3px 3px 7px rgb(100, 99, 99);
+}
+.timers-modal > a {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 0.5rem;
+}
+.timers-modal > a > span {
+  color: var(--secondary-blue);
+  font-weight: 600;
+}
+.timers-modal > a:hover {
+  cursor: pointer;
+  background-color: var(--light-gray-bg);
+}
+.timers-modal > a:hover span {
+  color: var(--primary-blue);
+}

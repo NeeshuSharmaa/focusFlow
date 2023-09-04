@@ -11,6 +11,7 @@
   z-index: 6;
 }
 .model-content {
+  position: relative;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -27,6 +28,7 @@
   flex-direction: column;
   gap: 1.25rem;
   padding: 2rem;
+  position: relative;
 }
 .modal-body > input,
 .modal-body > div > input,
@@ -34,11 +36,33 @@ select,
 textarea {
   padding: 0.8rem 1rem;
   border: 1px solid lightgray;
+  border-radius: 0.5rem;
 }
 .modal-body > div {
+  position: relative;
   display: flex;
   justify-content: space-between;
   gap: 1.25rem;
+}
+.modal-body > div > .due-date,
+.modal-body > .priority {
+  position: absolute;
+  background-color: white;
+  padding: 0.5rem 2rem 0.5rem 0.6rem;
+  font-size: 0.8rem;
+  color: gray;
+}
+.modal-body > div > .due-date {
+  right: 12%;
+  top: 10%;
+  padding-right: 2.5rem;
+}
+.hidden {
+  display: none;
+}
+.modal-body > .priority {
+  bottom: 12%;
+  left: 10%;
 }
 .modal > input:focus,
 .modal-body > div > input:focus,
