@@ -1,10 +1,11 @@
 import { useState } from "react";
-import "./Home.css";
-
-import TaskModal from "../../components/taskModal/TaskModal";
 import { useSelector } from "react-redux";
-import SummaryOnHome from "./SummaryOnHome";
-import Task from "../../components/task/Task";
+
+import SummaryOnHome from "./components/SummaryOnHome";
+import Task from "./components/task/Task";
+import TaskModal from "./components/taskModal/TaskModal";
+
+import "./Home.css";
 
 export default function Home() {
   const [showTaskModal, setShowTaskModal] = useState(false);

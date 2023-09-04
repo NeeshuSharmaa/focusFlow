@@ -78,6 +78,26 @@ nav {
   width: 20px;
   height: 20px;
 }
+.modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 6;
+}
+.modal-main {
+  position: relative;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  box-shadow: 3px 3px 7px rgb(100, 99, 99);
+}
 .outside-click {
   position: fixed;
   top: 0;
@@ -85,7 +105,11 @@ nav {
   left: 0;
   bottom: 0;
 }
-
+.modal-main > .actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .toast {
   border-radius: 0.2rem;
 }

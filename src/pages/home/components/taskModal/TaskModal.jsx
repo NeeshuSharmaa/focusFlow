@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { createdNewTask } from "../../features/tasksSlice";
-import "./TaskModal.css";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { createdNewTask } from "../../../../features/tasksSlice";
+import "./TaskModal.css";
 
 export default function TaskModal({ setShowTaskModal, showTaskModal }) {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
     priority: "",
     completed: false,
   });
+
   const handleFormSubmit = (e) => {
     if (newTask.name && newTask.dueDate && newTask.priority) {
       e.preventDefault();
@@ -50,7 +51,7 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
         className="outside-click"
         onClick={() => setShowTaskModal(false)}
       ></div>
-      <form className="model-content">
+      <form className="modal-main">
         <div className="modal-header">
           <h3>Add new Task</h3>
         </div>

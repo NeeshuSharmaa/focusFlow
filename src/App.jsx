@@ -1,15 +1,16 @@
 import { Route, Routes } from "react-router";
-import "react-toastify/dist/ReactToastify.css";
-import Home from "./pages/home/Home";
-import Dashboard from "./pages/dashboard/Dashboard";
-
-import "./App.css";
-import Sidebar from "./components/sidebar/Sidebar";
 import { ToastContainer } from "react-toastify";
-
 import { useSelector } from "react-redux";
+
 import Pomodoro from "./pages/timer/Pomodoro";
 import Stopwatch from "./pages/timer/Stopwatch";
+import Home from "./pages/home/Home";
+
+import Sidebar from "./components/sidebar/Sidebar";
+
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+import Insights from "./pages/insights/Insights";
 
 function App() {
   const isPomodoro = useSelector((state) => state.tasks.isPomodoro);
@@ -23,7 +24,7 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/insights" element={<Dashboard />} />
+          <Route path="/insights" element={<Insights />} />
           <Route
             path="/timer/:id"
             element={isPomodoro ? <Pomodoro /> : <Stopwatch />}
