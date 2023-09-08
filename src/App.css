@@ -113,3 +113,17 @@ nav {
 .toast {
   border-radius: 0.2rem;
 }
+.blue {
+  color: var(--primary-blue);
+}
+.gray {
+  color: var(--primary-black);
+}
+.flex-row-jb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.select-placeholder{
+  position:absolute;
+}

@@ -34,3 +34,7 @@
 .task > .modal > .modal-main > a:hover span {
   color: var(--primary-blue);
 }
+
+.task > div > .fa-icon {
+  color: var(--primary-blue);
+}

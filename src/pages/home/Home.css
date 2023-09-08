@@ -60,3 +60,8 @@
   width: 200px;
   height: 200px;
 }
+.filters-home {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
