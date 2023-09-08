@@ -4,7 +4,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faCirclePause } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+
 import { useSelector } from "react-redux";
 
 export default function Button({

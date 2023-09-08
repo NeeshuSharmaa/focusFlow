@@ -25,6 +25,7 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
         description: "",
         dueDate: "",
         priority: "",
+        completed: false,
       });
       setShowTaskModal(false);
     } else {
@@ -101,7 +102,7 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
             <option value="high">High </option>
             <option value="medium">Medium </option>
             <option value="low">Low </option>
-            <option value="none">No Priority</option>
+            <option value="none">None</option>
           </select>
           <span className={newTask.priority ? "hidden" : "priority"}>
             Priority

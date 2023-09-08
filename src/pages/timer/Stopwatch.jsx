@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircle,
-  faCirclePause,
-  faCirclePlay,
-} from "@fortawesome/free-regular-svg-icons";
+import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import Button from "./Button";
@@ -52,13 +48,16 @@ export default function Stopwatch() {
         time={time}
         setTime={setTime}
         initialTime={0}
+        setStopActive={setStopActive}
       />
       {stopActive && (
         <StopTimerModal
+          time={time}
+          initialTime={0}
+          taskId={taskToTrack.id}
           setStopActive={setStopActive}
           setTimerIsActive={setTimerIsActive}
           setTime={setTime}
-          initialTime={25 * 60}
         />
       )}
     </div>

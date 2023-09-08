@@ -5,13 +5,18 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { durationSaved, taskCompleted } from "../../features/tasksSlice";
 
 export default function StopTimerModal({
+  time,
+  initialTime,
+  taskId,
   setStopActive,
   setTimerIsActive,
   setTime,
-  initialTime,
 }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
     <div className="modal">
@@ -23,8 +28,9 @@ export default function StopTimerModal({
         <div className="actions">
           <div
             onClick={() => {
-              console.log("elapsed time saved");
-              console.log("task marked as COMPLETED");
+              dispatch(durationSaved({ id: taskId, currentTime: time }));
+              dispatch(taskCompleted({ id: taskId }));
+
               setStopActive(false);
               setTime(initialTime);
               navigate("/");
@@ -45,6 +51,7 @@ export default function StopTimerModal({
           <div
             onClick={() => {
               console.log("elapsed time saved");
+              dispatch(durationSaved({ id: taskId, currentTime: time }));
               setStopActive(false);
               setTime(initialTime);
               navigate("/");

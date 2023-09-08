@@ -67,10 +67,12 @@ export default function Pomodoro() {
       />
       {stopActive && (
         <StopTimerModal
+          time={time}
+          initialTime={25 * 60}
+          taskId={taskToTrack.id}
           setStopActive={setStopActive}
           setTimerIsActive={setTimerIsActive}
           setTime={setTime}
-          initialTime={25 * 60}
         />
       )}
     </div>
