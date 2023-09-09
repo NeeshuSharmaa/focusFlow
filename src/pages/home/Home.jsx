@@ -31,7 +31,7 @@ export default function Home() {
         type="date"
         onChange={(e) => dispatch(filterByDate({ date: e.target.value }))}
       />
-      <SummaryOnHome tasks={tasks} />
+      <SummaryOnHome tasks={tasksToDisplay} />
       <div className="flex-row-jb">
         <div className="filters-home">
           <select

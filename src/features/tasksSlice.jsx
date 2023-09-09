@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  allTasks: [],
+  allTasks: JSON.parse(localStorage.getItem("tasks")) || [],
   isPomodoro: false,
 };
 const tasksSlice = createSlice({

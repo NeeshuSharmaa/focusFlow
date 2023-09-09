@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import Button from "./Button";
 import StopTimerModal from "./stopTimerModal";
+import { getTimeHHMMSS } from "../../features/TimeUtils";
 
 export default function Stopwatch() {
   const { id: ID } = useParams();
@@ -15,15 +16,6 @@ export default function Stopwatch() {
   const [time, setTime] = useState(0);
   const [timerIsActive, setTimerIsActive] = useState(false);
   const [stopActive, setStopActive] = useState(false);
-
-  const getTime = () => {
-    const hr = Math.floor(time / 3600);
-    const mins = Math.floor((time % 3600) / 60);
-    const secs = time % 60;
-    return `${hr < 10 ? "0" + hr : hr} : ${mins < 10 ? "0" + mins : mins} : ${
-      secs < 10 ? "0" + secs : secs
-    }`;
-  };
 
   useEffect(() => {
     if (timerIsActive) {
@@ -41,7 +33,7 @@ export default function Stopwatch() {
         {taskToTrack?.name}
       </span>
 
-      <h1 className="time">{getTime(time)}</h1>
+      <h1 className="time">{getTimeHHMMSS(time)}</h1>
       <Button
         timerIsActive={timerIsActive}
         setTimerIsActive={setTimerIsActive}

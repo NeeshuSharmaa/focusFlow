@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import Button from "./Button";
 import StopTimerModal from "./stopTimerModal";
+import { getTimeMMSS } from "../../features/TimeUtils";
 
 export default function Pomodoro() {
   const { id: ID } = useParams();
@@ -23,7 +24,7 @@ export default function Pomodoro() {
       <div className="circular-bar">
         <CircularProgressbar
           value={percentage(time)}
-          text={getTime(time)}
+          text={getTimeMMSS(time)}
           styles={buildStyles({
             pathTransitionDuration: 0.5,
             pathColor: "var(--primary-blue)",
@@ -43,12 +44,6 @@ export default function Pomodoro() {
       return () => clearInterval(interval);
     }
   }, [time, timerIsActive]);
-
-  const getTime = (time) => {
-    const min = Math.floor(time / 60);
-    const sec = time % 60;
-    return `${min < 10 ? "0" + min : min}:${sec < 10 ? "0" + sec : sec}`;
-  };
 
   const percentage = (time) => (time / (25 * 60)) * 100;
 
