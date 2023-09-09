@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import SummaryOnHome from "./components/SummaryOnHome";
 import Task from "./components/task/Task";
@@ -8,24 +8,50 @@ import TaskModal from "./components/taskModal/TaskModal";
 import "./Home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  filterByDate,
+  filterByPriority,
+  filterByStatus,
+} from "../../features/filterSlice";
+import { filteredTasks } from "../../features/FilterLogic";
 
 export default function Home() {
   const [showTaskModal, setShowTaskModal] = useState(false);
 
   const tasks = useSelector((state) => state.tasks.allTasks);
+  const filters = useSelector((state) => state.filters.homeFilters);
+
+  const dispatch = useDispatch();
+
+  const tasksToDisplay = filteredTasks(tasks, filters);
 
   return (
     <div className="home">
+      <input
+        type="date"
+        onChange={(e) => dispatch(filterByDate({ date: e.target.value }))}
+      />
       <SummaryOnHome tasks={tasks} />
       <div className="flex-row-jb">
         <div className="filters-home">
-          <select>
+          <select
+            onChange={(e) =>
+              dispatch(filterByStatus({ status: e.target.value }))
+            }
+          >
+            <option defaultValue disabled>
+              Priority
+            </option>
             <option value="completed">Completed</option>
             <option value="pending">Pending</option>
             <option value="both">Both</option>
-            <span className="select-placeholder">By Priority</span>
+            {/* <span className="select-placeholder">By Priority</span> */}
           </select>
-          <select>
+          <select
+            onChange={(e) =>
+              dispatch(filterByPriority({ priority: e.target.value }))
+            }
+          >
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low"> Low</option>
@@ -41,7 +67,7 @@ export default function Home() {
 
       {!!tasks.length && (
         <section className="tasks-list">
-          {tasks.map((task) => (
+          {tasksToDisplay?.map((task) => (
             <Task key={task.id} {...task} />
           ))}{" "}
         </section>
