@@ -28,7 +28,13 @@ export default function StopTimerModal({
         <div className="actions">
           <div
             onClick={() => {
-              dispatch(durationSaved({ id: taskId, currentTime: time }));
+              dispatch(
+                durationSaved({
+                  id: taskId,
+                  currentTime: time,
+                  currentDate: Date.now(),
+                })
+              );
               dispatch(taskCompleted({ id: taskId }));
 
               setStopActive(false);
@@ -51,7 +57,13 @@ export default function StopTimerModal({
           <div
             onClick={() => {
               console.log("elapsed time saved");
-              dispatch(durationSaved({ id: taskId, currentTime: time }));
+              dispatch(
+                durationSaved({
+                  id: taskId,
+                  currentTime: time,
+                  currentDate: Date.now(),
+                })
+              );
               setStopActive(false);
               setTime(initialTime);
               navigate("/");

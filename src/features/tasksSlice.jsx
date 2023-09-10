@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getDate } from "./TimeUtils";
 
 const initialState = {
   allTasks: JSON.parse(localStorage.getItem("tasks")) || [],
@@ -10,10 +11,6 @@ const tasksSlice = createSlice({
   reducers: {
     createdNewTask: (state, action) => {
       state.allTasks = [...state.allTasks, action.payload.task];
-      // localStorage.setItem(
-      //   "tasks",
-      //   JSON.stringify([...state.allTasks, action.payload.task])
-      // );
 
       localStorage.setItem("tasks", JSON.stringify(state.allTasks));
     },
@@ -33,20 +30,34 @@ const tasksSlice = createSlice({
       state.allTasks = updatedTasks;
       localStorage.setItem("tasks", JSON.stringify(state.allTasks));
     },
-    durationSaved: (state, { payload }) => {
-      const duration = state.isPomodoro
-        ? 25 * 60 - payload.currentTime
-        : payload.currentTime;
+    durationSaved: (state, { payload: { id, currentTime, currentDate } }) => {
+      const date = getDate(currentDate);
+      const duration = state.isPomodoro ? 25 * 60 - currentTime : currentTime;
+
+      const taskWithUpdatedTime = (task) => {
+        if (task.timeSpent.find((curr) => curr.date === date)) {
+          return {
+            ...task,
+            timeSpent: task.timeSpent.map((curr) =>
+              curr.date === date
+                ? { ...curr, elapsedTime: curr.elapsedTime + duration }
+                : curr
+            ),
+          };
+        } else {
+          return {
+            ...task,
+            timeSpent: [...task.timeSpent, { date, elapsedTime: duration }],
+          };
+        }
+      };
+
       const updatedTasks = state.allTasks.map((task) =>
-        task.id === payload.id
-          ? task.elapsedTime
-            ? { ...task, elapsedTime: duration + task.elapsedTime }
-            : { ...task, elapsedTime: duration }
-          : task
+        task.id === id ? taskWithUpdatedTime(task) : task
       );
 
       state.allTasks = updatedTasks;
-      localStorage.setItem("tasks", JSON.stringify(state.allTasks));
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     },
   },
 });

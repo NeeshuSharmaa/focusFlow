@@ -13,6 +13,7 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
     dueDate: "",
     priority: "",
     completed: false,
+    timeSpent: [],
   });
 
   const handleFormSubmit = (e) => {

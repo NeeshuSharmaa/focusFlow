@@ -12,3 +12,11 @@ export const getTimeHHMMSS = (time) => {
     secs < 10 ? "0" + secs : secs
   }`;
 };
+
+export const getDate = (timestamp) => {
+  const currentDate = new Date(timestamp);
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const date = currentDate.getDate();
+  return `${year}-${month}-${date}`;
+};
