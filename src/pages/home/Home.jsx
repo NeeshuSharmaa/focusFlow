@@ -8,11 +8,7 @@ import TaskModal from "./components/taskModal/TaskModal";
 import "./Home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import {
-  filterByDate,
-  filterByPriority,
-  filterByStatus,
-} from "../../features/filterSlice";
+import { filterByPriority, filterByStatus } from "../../features/filterSlice";
 import { filteredTasks } from "../../features/FilterLogic";
 
 export default function Home() {
@@ -27,10 +23,6 @@ export default function Home() {
 
   return (
     <div className="home">
-      <input
-        type="date"
-        onChange={(e) => dispatch(filterByDate({ date: e.target.value }))}
-      />
       <SummaryOnHome tasks={tasksToDisplay} />
       <div className="flex-row-jb">
         <div className="filters-home">
@@ -45,7 +37,6 @@ export default function Home() {
             <option value="completed">Completed</option>
             <option value="pending">Pending</option>
             <option value="both">Both</option>
-            {/* <span className="select-placeholder">By Priority</span> */}
           </select>
           <select
             onChange={(e) =>
@@ -56,7 +47,6 @@ export default function Home() {
             <option value="medium">Medium</option>
             <option value="low"> Low</option>
             <option value="none">None</option>
-            <span className="select-placeholder">By Priority</span>
           </select>
         </div>
         <button className="primary-btn" onClick={() => setShowTaskModal(true)}>

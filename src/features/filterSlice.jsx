@@ -13,9 +13,6 @@ const filtersSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    filterByDate: (state, action) => {
-      state.homeFilters.date = action.payload.date;
-    },
     filterByStatus: (state, action) => {
       state.homeFilters.status = action.payload.status;
     },
@@ -27,5 +24,4 @@ const filtersSlice = createSlice({
 
 export default filtersSlice.reducer;
 
-export const { filterByDate, filterByStatus, filterByPriority } =
-  filtersSlice.actions;
+export const { filterByStatus, filterByPriority } = filtersSlice.actions;
