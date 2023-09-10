@@ -27,6 +27,7 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
         dueDate: "",
         priority: "",
         completed: false,
+        timeSpent: [],
       });
       setShowTaskModal(false);
     } else {
