@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getDate } from "./TimeUtils";
+import { getDateInFormat } from "./TimeUtils";
 
 const initialState = {
   allTasks: JSON.parse(localStorage.getItem("tasks")) || [],
@@ -31,7 +31,7 @@ const tasksSlice = createSlice({
       localStorage.setItem("tasks", JSON.stringify(state.allTasks));
     },
     durationSaved: (state, { payload: { id, currentTime, currentDate } }) => {
-      const date = getDate(currentDate);
+      const date = getDateInFormat(currentDate);
       const duration = state.isPomodoro ? 25 * 60 - currentTime : currentTime;
 
       const taskWithUpdatedTime = (task) => {

@@ -1,0 +1,20 @@
+.stacked-bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.stacked-bar-chart > .legends-outer {
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.stacked-bar-chart > .legends-outer > .legend {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.legend > .legend-color {
+  width: 30px;
+  height: 10px;
+}

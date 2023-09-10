@@ -13,10 +13,14 @@ export const getTimeHHMMSS = (time) => {
   }`;
 };
 
-export const getDate = (timestamp) => {
+export const getDateInFormat = (timestamp) => {
   const currentDate = new Date(timestamp);
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const date = currentDate.getDate();
-  return `${year}-${month}-${date}`;
+  return `${year}-${month < 10 ? "0" + month : month}-${
+    date < 10 ? "0" + date : date
+  }`;
 };
+
+export const secsToHrs = (time) => time / 3600;
