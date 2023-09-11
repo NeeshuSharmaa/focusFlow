@@ -28,3 +28,33 @@ export const generateDateArray = () => {
 
   return dateArray;
 };
+
+export const doughnutHelpers = (tasks) => {
+  const dateArr = generateDateArray();
+
+  const tasksWithTimeSpent = tasks.reduce((acc, { name, timeSpent }) => {
+    const time = timeSpent.reduce(
+      (acc, { date: DATE, elapsedTime }) =>
+        dateArr.some((date) => date === DATE) ? acc + elapsedTime : acc,
+      0
+    );
+
+    return [...acc, { name, time }];
+  }, []);
+
+  const labels = tasksWithTimeSpent.map(({ name }) => name);
+  const dataForDatasets = tasksWithTimeSpent.map(({ time }) => time);
+
+  const generateBgColorsArr = (n) => {
+    let colorsArr = [];
+    for (let i = 0; i <= n; i++) {
+      colorsArr = [...colorsArr, generateRandomColor()];
+    }
+
+    return colorsArr;
+  };
+
+  const colorsForArcs = generateBgColorsArr(labels.length);
+
+  return { labels, dataForDatasets, colorsForArcs };
+};
