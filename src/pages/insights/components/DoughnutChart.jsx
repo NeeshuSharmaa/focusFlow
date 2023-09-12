@@ -9,6 +9,20 @@ export function DoughnutChart() {
 
   const doughnut = doughnutHelpers(tasks);
 
+  const options = {
+    plugins: {
+      title: {
+        display: true,
+        text: "",
+      },
+      legend: {
+        display: false,
+      },
+    },
+    responsive: true,
+    maintainAspectRatio: true,
+  };
+
   const data = {
     labels: doughnut.labels,
     datasets: [
@@ -20,5 +34,9 @@ export function DoughnutChart() {
       },
     ],
   };
-  return <Doughnut data={data} className="doughnut-chart" />;
+  return (
+    <div style={{ width: "100%" }}>
+      <Doughnut data={data} options={options} />
+    </div>
+  );
 }
