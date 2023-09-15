@@ -4,7 +4,9 @@ export default function SummaryOnHome({ tasks }) {
   const uncompletedTasks = tasks?.filter(({ completed }) => !completed);
   const completedTasks = tasks?.filter(({ completed }) => completed);
   const elapsedTime = tasks?.reduce(
-    (totalTime, task) => totalTime + (task.elapsedTime || 0),
+    (totalTime, task) =>
+      totalTime +
+      (task.timeSpent.reduce((acc, curr) => acc + curr.elapsedTime, 0) || 0),
     0
   );
   const getTime = (time) => {
@@ -28,7 +30,7 @@ export default function SummaryOnHome({ tasks }) {
   return (
     <section className="summary">
       <div className="summary-child">
-        <h1>{uncompletedTasks.length}</h1>
+        <h1>{uncompletedTasks?.length}</h1>
 
         <small>Tasks to be Completed</small>
       </div>
@@ -40,7 +42,7 @@ export default function SummaryOnHome({ tasks }) {
         <small>Elapsed Time</small>
       </div>
       <div className="summary-child">
-        <h1>{completedTasks.length}</h1>
+        <h1>{completedTasks?.length}</h1>
         <small>Completed Tasks</small>
       </div>
     </section>
