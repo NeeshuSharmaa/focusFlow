@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import SummaryOnHome from "./components/SummaryOnHome";
@@ -8,7 +8,12 @@ import TaskModal from "./components/taskModal/TaskModal";
 import "./Home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import { filterByPriority, filterByStatus } from "../../features/filterSlice";
+import {
+  filterByPriority_H,
+  filterBySearch_H,
+  filterByStatus_H,
+  removeFilters_H,
+} from "../../features/filterSlice";
 import { filteredTasks } from "../../features/FilterLogic";
 
 export default function Home() {
@@ -20,34 +25,50 @@ export default function Home() {
   const dispatch = useDispatch();
 
   const tasksToDisplay = filteredTasks(tasks, filters);
+  console.log(filters);
 
   return (
     <div className="home">
       <SummaryOnHome tasks={tasksToDisplay} />
       <div className="flex-row-jb">
         <div className="filters-home">
-          <select
+          <input
+            value={filters.search}
+            type="text"
+            placeholder="search tasks via name or due date (format: YYYY-MM-DD)"
             onChange={(e) =>
-              dispatch(filterByStatus({ status: e.target.value }))
+              dispatch(filterBySearch_H({ search: e.target.value }))
+            }
+          />
+          <select
+            value={filters.status}
+            onChange={(e) =>
+              dispatch(filterByStatus_H({ status: e.target.value }))
             }
           >
-            <option defaultValue disabled>
-              Priority
+            <option value="" disabled>
+              Status
             </option>
             <option value="completed">Completed</option>
             <option value="pending">Pending</option>
             <option value="both">Both</option>
           </select>
           <select
+            value={filters.priority}
             onChange={(e) =>
-              dispatch(filterByPriority({ priority: e.target.value }))
+              dispatch(filterByPriority_H({ priority: e.target.value }))
             }
           >
+            <option value="" disabled>
+              Priority
+            </option>
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low"> Low</option>
             <option value="none">None</option>
           </select>
+          <span onClick={() => dispatch(removeFilters_H())}>Clear filters</span>
+          {/* disabled + disabled color when no filter is applied */}
         </div>
         <button className="primary-btn" onClick={() => setShowTaskModal(true)}>
           <FontAwesomeIcon icon={faCirclePlus} className="fa-icon" />
