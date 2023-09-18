@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import Button from "./Button";
 import StopTimerModal from "./stopTimerModal";
 import { getTimeHHMMSS } from "../../features/TimeUtils";
+import TaskInfo from "./TaskInfo";
 
 export default function Stopwatch() {
   const { id: ID } = useParams();
@@ -28,10 +29,7 @@ export default function Stopwatch() {
   }, [time, timerIsActive]);
   return (
     <div className="stopwatch">
-      <span>
-        <FontAwesomeIcon icon={faCircle} />
-        {taskToTrack?.name}
-      </span>
+      <TaskInfo task={taskToTrack} />
 
       <h1 className="time">{getTimeHHMMSS(time)}</h1>
       <Button

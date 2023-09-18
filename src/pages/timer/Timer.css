@@ -2,23 +2,51 @@
 .stopwatch {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   background-color: var(--light-gray-bg);
-  align-items: center;
-  gap: 3rem;
+  gap: 2rem;
 }
-.timer-pomodoro > span,
-.stopwatch > span {
-  padding: 0.8rem 2.5rem;
-  background-color: white;
-  width: max-content;
-  border-radius: 1.5rem;
-  display: flex;
-  gap: 1rem;
+.timer-pomodoro {
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+.timer-pomodoro > .flex-row-jb {
+  padding: 1rem 2.5rem;
+}
+.stopwatch {
   align-items: center;
+  justify-content: space-around;
+  padding: 2rem 0;
+}
+.stopwatch > .task-info {
+  align-items: center;
+}
+.task-info {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   color: var(--primary-black);
 }
 
+.task-info > .sub-info,
+.task-info > .header {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.sub-info > .flex-row-jb {
+  gap: 0.8rem;
+}
+.task-info > .header > .dropdown-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 12%;
+  right: -15%;
+}
+
+.task-info > p {
+  margin-top: 1rem;
+}
 .circular-bar {
   width: 400px;
   height: 400px;
@@ -35,9 +63,13 @@
 }
 
 .stopwatch > .time {
-  color: var(--primary-black);
+  color: var(--secondary-black);
   font-size: 6rem;
   font-family: "Fjalla One", sans-serif;
+  padding: 4rem;
+  border-radius: 1.5rem;
+  background-color: white;
+  width: max-content;
 }
 
 .stop-active-modal {

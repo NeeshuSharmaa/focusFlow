@@ -11,6 +11,13 @@ import { getTimeMMSS } from "../../features/TimeUtils";
 import PomoBreakModal from "./PomoBreakModal";
 import useSound from "use-sound";
 import timesUpTimer from "../../sound/timesUp.mp3";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCaretDown,
+  faCaretUp,
+  faFlag,
+} from "@fortawesome/free-solid-svg-icons";
+import TaskInfo from "./TaskInfo";
 
 export default function Pomodoro() {
   const { id: ID } = useParams();
@@ -60,17 +67,20 @@ export default function Pomodoro() {
 
   return (
     <div className="timer-pomodoro">
-      <span>{taskToTrack?.name}</span>
+      <div className="flex-row-jb">
+        <TaskInfo task={taskToTrack} />
+        <Button
+          time={time}
+          setTime={setTime}
+          initialTime={pomodoroLength * 60}
+          timerIsActive={timerIsActive}
+          setTimerIsActive={setTimerIsActive}
+          setStopActive={setStopActive}
+        />
+      </div>
+
       <PomodoroDisplay />
 
-      <Button
-        time={time}
-        setTime={setTime}
-        initialTime={pomodoroLength * 60}
-        timerIsActive={timerIsActive}
-        setTimerIsActive={setTimerIsActive}
-        setStopActive={setStopActive}
-      />
       {stopActive && (
         <StopTimerModal
           time={time}

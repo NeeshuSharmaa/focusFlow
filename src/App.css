@@ -23,6 +23,7 @@ a {
 button {
   cursor: pointer;
 }
+
 .main {
   display: grid;
   grid-template-columns: auto 80%;
@@ -60,7 +61,7 @@ nav {
   background-color: var(--primary-blue);
   color: white;
   width: max-content;
-  align-self: flex-end;
+  /* align-self: flex-end; */
 }
 .secondary-btn {
   display: flex;
