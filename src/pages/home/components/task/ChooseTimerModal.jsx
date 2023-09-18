@@ -5,8 +5,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { pomodoroMode, stopwatchMode } from "../../../../features/tasksSlice";
+import { useSelector } from "react-redux";
 
 export default function ChooseTimerModal({ dispatch, id, setTimerModeModal }) {
+  const pomodoroLength = useSelector((state) => state.settings.pomodoroLength);
   return (
     <div className="modal">
       <div
@@ -19,11 +21,13 @@ export default function ChooseTimerModal({ dispatch, id, setTimerModeModal }) {
       <div className="modal-main">
         <Link to={`/timer/${id}`} onClick={() => dispatch(pomodoroMode())}>
           <span>
-            25:00{" "}
+            {pomodoroLength}:00{" "}
             <FontAwesomeIcon icon={faArrowRightLong} width="15" height="15" />{" "}
             00:00
           </span>
-          <small>Countdown from 25:00 until the end of the time</small>
+          <small>
+            Countdown from {pomodoroLength}:00 minutes until the end of the time
+          </small>
         </Link>
         <Link to={`/timer/${id}`} onClick={() => dispatch(stopwatchMode())}>
           <span>
