@@ -6,6 +6,8 @@ import { faCirclePause } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useSelector } from "react-redux";
+import useSound from "use-sound";
+import startTimer from "../../sound/startTimer.mp3";
 
 export default function Button({
   timerIsActive,
@@ -15,18 +17,22 @@ export default function Button({
   initialTime,
   setStopActive,
 }) {
+  const [startSound] = useSound(startTimer, { volume: 5 });
+
   const isPomodoro = useSelector((state) => state.tasks.isPomodoro);
   const stopTimer = () => {
     setStopActive(true);
     setTimerIsActive(false);
   };
-
   return (
     <>
       {!timerIsActive && time === initialTime && (
         <button
           className="primary-btn"
-          onClick={() => setTimerIsActive((active) => !active)}
+          onClick={() => {
+            setTimerIsActive((active) => !active);
+            startSound();
+          }}
         >
           <FontAwesomeIcon icon={faCirclePlay} className="fa-icon" />
           <span>Start to focus</span>

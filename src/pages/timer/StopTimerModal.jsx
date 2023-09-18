@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { durationSaved, taskCompleted } from "../../features/tasksSlice";
+import pauseTimer from "../../sound/pauseTimer.mp3";
+import useSound from "use-sound";
 
 export default function StopTimerModal({
   time,
@@ -18,8 +20,10 @@ export default function StopTimerModal({
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [pauseSound] = useSound(pauseTimer, { volume: 5 });
   return (
     <div className="modal">
+      <div className="outside-click" onClick={() => setStopActive(false)}></div>
       <div className="modal-main stop-active-modal">
         <div>
           <span>Is your task completed?</span>
@@ -56,7 +60,7 @@ export default function StopTimerModal({
           </div>
           <div
             onClick={() => {
-              console.log("elapsed time saved");
+              pauseSound();
               dispatch(
                 durationSaved({
                   id: taskId,
