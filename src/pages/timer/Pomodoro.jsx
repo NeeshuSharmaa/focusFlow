@@ -35,7 +35,7 @@ export default function Pomodoro() {
           styles={buildStyles({
             pathTransitionDuration: 0.5,
             pathColor: "var(--primary-blue)",
-            textColor: "var(--secondary-black)",
+            textColor: "var(--primary-black)",
           })}
         />
       </div>

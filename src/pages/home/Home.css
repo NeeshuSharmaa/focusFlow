@@ -10,7 +10,7 @@
   padding: 2rem;
   background-color: white;
   border-radius: 0.5rem;
-  color: lightslategray;
+  color: var(--primary-black);
 }
 .summary-child {
   display: flex;
