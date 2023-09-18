@@ -11,6 +11,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Insights from "./pages/insights/Insights";
+import Settings from "./pages/settings/Settings";
 
 function App() {
   const isPomodoro = useSelector((state) => state.tasks.isPomodoro);
@@ -29,6 +30,7 @@ function App() {
             path="/timer/:id"
             element={isPomodoro ? <Pomodoro /> : <Stopwatch />}
           />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </div>
       <ToastContainer
