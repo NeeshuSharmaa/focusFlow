@@ -3,8 +3,9 @@ import { getDateInFormat } from "./TimeUtils";
 
 const initialState = {
   allTasks: JSON.parse(localStorage.getItem("tasks")) || [],
-  isPomodoro: false,
+  isPomodoro: JSON.parse(localStorage.getItem("pomodoroMode")) || false,
 };
+console.log(initialState.isPomodoro);
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
@@ -16,9 +17,11 @@ const tasksSlice = createSlice({
     },
     pomodoroMode: (state) => {
       state.isPomodoro = true;
+      localStorage.setItem("pomodoroMode", state.isPomodoro);
     },
     stopwatchMode: (state) => {
       state.isPomodoro = false;
+      localStorage.setItem("pomodoroMode", state.isPomodoro);
     },
     taskCompleted: (state, action) => {
       const updatedTasks = state.allTasks.map((task) =>
