@@ -58,3 +58,34 @@ export const doughnutHelpers = (tasks) => {
 
   return { labels, dataForDatasets, colorsForArcs };
 };
+
+export const giveMaxY = (allTasks, labelDates) => {
+  const timeSpentByTasksPerLabelDates = allTasks.map(({ timeSpent }) =>
+    labelDates.map((date) => {
+      const isTimeSpentOnDate = timeSpent.find(
+        ({ date: DATE }) => DATE === date
+      );
+      return isTimeSpentOnDate ? isTimeSpentOnDate.elapsedTime : 0;
+    })
+  );
+
+  const totalTimeSpentByAllTasksPerDay = timeSpentByTasksPerLabelDates.reduce(
+    (acc, curr) =>
+      curr.map(
+        (time, index) => time + acc[index],
+        [...timeSpentByTasksPerLabelDates[0]]
+      )
+  );
+  const maxValue = totalTimeSpentByAllTasksPerDay.reduce(
+    (acc, curr) => (acc > curr ? acc : curr),
+    totalTimeSpentByAllTasksPerDay[0]
+  );
+
+  if (maxValue < 60) {
+    return { unit: "in secs", value: maxValue };
+  } else if (maxValue > 60 && maxValue < 3600) {
+    return { unit: "in mins", value: maxValue / 60 + 1 };
+  } else {
+    return { unit: "in hrs", value: maxValue / 3600 + 0.2 };
+  }
+};

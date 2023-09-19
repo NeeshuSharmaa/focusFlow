@@ -9,7 +9,11 @@ import {
 } from "chart.js";
 
 import { Bar } from "react-chartjs-2";
-import { generateDateArray, generateRandomColor } from "./HelperFuncs";
+import {
+  generateDateArray,
+  generateRandomColor,
+  giveMaxY,
+} from "./HelperFuncs";
 import { secsToHrs } from "../../../features/TimeUtils";
 import { useSelector } from "react-redux";
 import "./Charts.css";
@@ -23,11 +27,32 @@ export default function StackedBarChart() {
     Legend
   );
 
+  const labels = generateDateArray();
+
+  const tasks = useSelector((state) => state.tasks.allTasks);
+  const datasets = tasks.map(({ name, timeSpent }) => ({
+    label: name,
+    data: labels.map((date) => {
+      const ifTimeSpentOnDate = timeSpent.find(
+        ({ date: DATE }) => DATE === date
+      );
+
+      if (giveMaxY(tasks, labels).unit === "in hrs") {
+        return ifTimeSpentOnDate ? secsToHrs(ifTimeSpentOnDate.elapsedTime) : 0;
+      } else if (giveMaxY(tasks, labels).unit === "in mins") {
+        return ifTimeSpentOnDate ? ifTimeSpentOnDate.elapsedTime / 60 : 0;
+      } else {
+        return ifTimeSpentOnDate ? ifTimeSpentOnDate.elapsedTime : 0;
+      }
+    }),
+    backgroundColor: generateRandomColor(),
+  }));
+
   const options = {
     plugins: {
       title: {
         display: true,
-        text: "",
+        text: "time/task per day weekly report",
       },
       legend: {
         display: false,
@@ -46,30 +71,14 @@ export default function StackedBarChart() {
       y: {
         stacked: true,
         beginAtZero: true,
-        max: 300,
+        max: giveMaxY(tasks, labels).value,
         title: {
           display: true,
-          text: "Elapsed Time (hours)",
+          text: `Elapsed time (${giveMaxY(tasks, labels).unit})`,
         },
       },
     },
   };
-
-  const labels = generateDateArray();
-
-  const tasks = useSelector((state) => state.tasks.allTasks);
-  const datasets = tasks.map(({ name, timeSpent }) => ({
-    label: name,
-    data: labels.map((date) => {
-      const ifTimeSpentOnDate = timeSpent.find(({ date: DATE }) => {
-        console.log(DATE, date);
-        return DATE === date;
-      });
-      // return ifTimeSpentOnDate ? secsToHrs(ifTimeSpentOnDate.elapsedTime) : 0;
-      return ifTimeSpentOnDate ? ifTimeSpentOnDate.elapsedTime : 0;
-    }),
-    backgroundColor: generateRandomColor(),
-  }));
 
   const data = {
     labels,
@@ -77,7 +86,6 @@ export default function StackedBarChart() {
   };
 
   const legendHtml = datasets.map((dataset, index) => {
-    console.log(dataset.data);
     return dataset.data.reduce((acc, curr) => acc + curr, 0) ? (
       <div className="legend" key={index}>
         <div
@@ -93,8 +101,8 @@ export default function StackedBarChart() {
 
   return (
     <div className="stacked-bar-chart">
-      <Bar options={options} data={data} />
-      <div className="legends-outer">{legendHtml}</div>
+      <Bar options={options} data={data} className="chart" />
+      {/* <div className="legends-outer">{legendHtml}</div> */}
     </div>
   );
 }
