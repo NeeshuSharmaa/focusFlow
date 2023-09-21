@@ -60,32 +60,33 @@ export const doughnutHelpers = (tasks) => {
 };
 
 export const giveMaxY = (allTasks, labelDates) => {
-  const timeSpentByTasksPerLabelDates = allTasks.map(({ timeSpent }) =>
-    labelDates.map((date) => {
-      const isTimeSpentOnDate = timeSpent.find(
-        ({ date: DATE }) => DATE === date
-      );
-      return isTimeSpentOnDate ? isTimeSpentOnDate.elapsedTime : 0;
-    })
-  );
+  if (allTasks.length) {
+    const timeSpentByTasksPerLabelDates = allTasks.map(({ timeSpent }) =>
+      labelDates.map((date) => {
+        const isTimeSpentOnDate = timeSpent.find(
+          ({ date: DATE }) => DATE === date
+        );
+        return isTimeSpentOnDate ? isTimeSpentOnDate.elapsedTime : 0;
+      })
+    );
 
-  const totalTimeSpentByAllTasksPerDay = timeSpentByTasksPerLabelDates.reduce(
-    (acc, curr) =>
-      curr.map(
-        (time, index) => time + acc[index],
-        [...timeSpentByTasksPerLabelDates[0]]
-      )
-  );
-  const maxValue = totalTimeSpentByAllTasksPerDay.reduce(
-    (acc, curr) => (acc > curr ? acc : curr),
-    totalTimeSpentByAllTasksPerDay[0]
-  );
+    const totalTimeSpentByAllTasksPerDay = timeSpentByTasksPerLabelDates.reduce(
+      (acc, curr) =>
+        curr.map(
+          (time, index) => time + acc[index],
+          [...timeSpentByTasksPerLabelDates[0]]
+        )
+    );
+    const maxValue = Math.max(...totalTimeSpentByAllTasksPerDay);
 
-  if (maxValue < 60) {
-    return { unit: "in secs", value: maxValue };
-  } else if (maxValue > 60 && maxValue < 3600) {
-    return { unit: "in mins", value: maxValue / 60 + 1 };
+    if (maxValue < 60) {
+      return { unit: "in secs", value: Math.ceil(maxValue / 10) * 10 };
+    } else if (maxValue > 60 && maxValue < 3600) {
+      return { unit: "in mins", value: Math.ceil(maxValue / 60 / 10) * 10 };
+    } else {
+      return { unit: "in hrs", value: Math.ceil(maxValue / 3600 / 10) * 10 };
+    }
   } else {
-    return { unit: "in hrs", value: maxValue / 3600 + 0.2 };
+    return { unit: "in secs", value: 60 };
   }
 };
