@@ -5,13 +5,33 @@ import { useDispatch } from "react-redux";
 
 import ChooseTimerModal from "./ChooseTimerModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck, faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleCheck,
+  faCirclePlay,
+  faFlag,
+} from "@fortawesome/free-solid-svg-icons";
 import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import { taskCompleted } from "../../../../features/tasksSlice";
 
-export default function Task({ id, name, dueDate, completed }) {
+export default function Task({ id, name, dueDate, completed, priority }) {
   const [timerModeModal, setTimerModeModal] = useState(false);
   const dispatch = useDispatch();
+
+  const priorityColor = () => {
+    if (completed) {
+      return "gray";
+    } else {
+      if (priority === "high") {
+        return "high-priority";
+      } else if (priority === "medium") {
+        return "medium-priority";
+      } else if (priority === "low") {
+        return "low-priority";
+      } else {
+        return "no-priority";
+      }
+    }
+  };
 
   return (
     <div className="task">
@@ -35,9 +55,13 @@ export default function Task({ id, name, dueDate, completed }) {
             onClick={() => setTimerModeModal(true)}
           />
         )}
-        <span>{name}</span>
+        <span className={completed ? "gray" : "black"}>{name}</span>
       </div>
-      <span>{dueDate}</span>
+      <div>
+        <span className={completed ? "gray" : "black"}>{dueDate}</span>
+
+        <FontAwesomeIcon icon={faFlag} className={priorityColor()} />
+      </div>
     </div>
   );
 }
