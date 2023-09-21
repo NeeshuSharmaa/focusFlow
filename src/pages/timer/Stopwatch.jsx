@@ -30,16 +30,18 @@ export default function Stopwatch() {
   return (
     <div className="stopwatch">
       <TaskInfo task={taskToTrack} />
+      <div className="timer">
+        <h1 className="time">{getTimeHHMMSS(time)}</h1>
+        <Button
+          timerIsActive={timerIsActive}
+          setTimerIsActive={setTimerIsActive}
+          time={time}
+          setTime={setTime}
+          initialTime={0}
+          setStopActive={setStopActive}
+        />
+      </div>
 
-      <h1 className="time">{getTimeHHMMSS(time)}</h1>
-      <Button
-        timerIsActive={timerIsActive}
-        setTimerIsActive={setTimerIsActive}
-        time={time}
-        setTime={setTime}
-        initialTime={0}
-        setStopActive={setStopActive}
-      />
       {stopActive && (
         <StopTimerModal
           time={time}

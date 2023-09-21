@@ -6,11 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
-export default function TaskInfo({
-  task: { name, dueDate, priority, description },
-}) {
-  const [showDescription, setShowDescription] = useState(false);
-
+export default function TaskInfo({ task: { name, dueDate, priority } }) {
   const priorityColor = () => {
     if (priority === "high") {
       return "high-priority";
@@ -24,14 +20,7 @@ export default function TaskInfo({
   };
   return (
     <div className="task-info">
-      <div className="header">
-        <h2>{name}</h2>
-        <FontAwesomeIcon
-          className="dropdown-icon"
-          icon={showDescription ? faCaretUp : faCaretDown}
-          onClick={() => setShowDescription((show) => !show)}
-        />
-      </div>
+      <h2>{name}</h2>
 
       <div className="sub-info">
         <small>{dueDate}</small>
@@ -43,7 +32,6 @@ export default function TaskInfo({
           </small>
         </div>
       </div>
-      {showDescription && <p>{description}</p>}
     </div>
   );
 }

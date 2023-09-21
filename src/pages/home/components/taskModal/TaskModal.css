@@ -12,8 +12,7 @@
 }
 .modal-body > input,
 .modal-body > div > input,
-.modal-body > select,
-.modal-body > textarea {
+.modal-body > select {
   padding: 0.8rem 1rem;
   border: 1px solid lightgray;
   border-radius: 0.5rem;
@@ -41,7 +40,7 @@
   display: none;
 }
 .modal-body > .priority {
-  bottom: 12%;
+  bottom: 20%;
   left: 10%;
 }
 .modal > input:focus,

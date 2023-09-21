@@ -67,8 +67,9 @@ export default function Pomodoro() {
 
   return (
     <div className="timer-pomodoro">
-      <div className="flex-row-jb">
-        <TaskInfo task={taskToTrack} />
+      <TaskInfo task={taskToTrack} />
+      <div className="timer">
+        <PomodoroDisplay />
         <Button
           time={time}
           setTime={setTime}
@@ -78,8 +79,6 @@ export default function Pomodoro() {
           setStopActive={setStopActive}
         />
       </div>
-
-      <PomodoroDisplay />
 
       {stopActive && (
         <StopTimerModal

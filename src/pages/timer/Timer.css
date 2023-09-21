@@ -1,72 +1,66 @@
 .timer-pomodoro,
 .stopwatch {
   display: flex;
+
+  align-items: center;
   flex-direction: column;
+
   background-color: var(--light-gray-bg);
-  gap: 2rem;
 }
 .timer-pomodoro {
-  justify-content: center;
-  padding: 3rem 1rem;
-}
-.timer-pomodoro > .flex-row-jb {
-  padding: 1rem 2.5rem;
+  gap: 2rem;
 }
 .stopwatch {
-  align-items: center;
-  justify-content: space-around;
-  padding: 2rem 0;
+  gap: 3.5rem;
 }
-.stopwatch > .task-info {
-  align-items: center;
+.timer-pomodoro,
+.stopwatch {
+  padding: 3rem 1rem;
 }
-.task-info {
-  position: relative;
+.timer-pomodoro > .timer,
+.stopwatch > .timer {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  color: var(--primary-black);
+  align-items: center;
+  gap: 3rem;
+  justify-content: center;
 }
 
-.task-info > .sub-info,
-.task-info > .header {
+.task-info {
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
   align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-black);
+  padding: 0 2rem;
+}
+
+.task-info > .sub-info {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.sub-info > small,
+.sub-info > .flex-row-jb {
+  border-radius: 1.25rem;
+  background-color: white;
+  padding: 0.5rem 1.5rem;
 }
 .sub-info > .flex-row-jb {
   gap: 0.8rem;
 }
-.task-info > .header > .dropdown-icon {
-  cursor: pointer;
-  position: absolute;
-  top: 12%;
-  right: -15%;
-}
 
-.task-info > p {
-  margin-top: 1rem;
-}
 .circular-bar {
   width: 400px;
   height: 400px;
   align-self: center;
 }
-.timer-pomodoro > .primary-btn,
-.stopwatch > .primary-btn {
-  align-self: center;
-}
-.timer-pomodoro > .primary-btn > .fa-icon,
-.stopwatch > .primary-btn > .fa-icon {
-  width: 25px;
-  height: 25px;
-}
 
-.stopwatch > .time {
-  color: var(--secondary-black);
-  font-size: 6rem;
+.stopwatch > .timer > .time {
+  color: var(--primary-black);
+  font-size: 7rem;
   font-family: "Fjalla One", sans-serif;
-  padding: 4rem;
+  padding: 6rem 4rem;
   border-radius: 1.5rem;
   background-color: white;
   width: max-content;

@@ -9,7 +9,7 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
 
   const [newTask, setNewTask] = useState({
     name: "",
-    description: "",
+
     dueDate: "",
     priority: "",
     completed: false,
@@ -38,9 +38,11 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
   const handleCancel = () => {
     setNewTask({
       name: "",
-      description: "",
+
       dueDate: "",
       priority: "",
+      completed: false,
+      timeSpent: [],
     });
     setShowTaskModal(false);
   };
@@ -81,16 +83,6 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
               Due Date
             </span>
           </div>
-
-          <textarea
-            value={newTask.description}
-            placeholder="Description (optional)"
-            rows="5"
-            cols="5"
-            onChange={(e) =>
-              setNewTask((prev) => ({ ...prev, description: e.target.value }))
-            }
-          />
 
           <select
             value={newTask.priority}
