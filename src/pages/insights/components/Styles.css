@@ -1,0 +1,39 @@
+.d-chart,
+.stacked-bar-chart {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.d-chart > .chart,
+.stacked-bar-chart > .chart {
+  height: 500px !important;
+}
+table {
+  padding: 1rem;
+  border-spacing: 50px 0;
+  border-collapse: separate;
+
+  width: 100%;
+  border-radius: 1rem;
+  background-color: white;
+}
+
+td {
+  padding: 1rem;
+  color: var(--primary-black);
+}
+td:first-child {
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+
+td:last-child {
+  border-bottom-right-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+th {
+  padding: 1rem;
+  text-align: left;
+}

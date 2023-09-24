@@ -9,15 +9,13 @@ import {
 } from "chart.js";
 
 import { Bar } from "react-chartjs-2";
-import {
-  generateDateArray,
-  generateRandomColor,
-  giveMaxY,
-} from "./HelperFuncs";
+
 import { secsToHrs } from "../../../features/TimeUtils";
 import { useSelector } from "react-redux";
-import "./Charts.css";
-export default function StackedBarChart() {
+import "./Styles.css";
+import { giveMaxY } from "./ChartHelper";
+
+export default function StackedBarChart({ colors, dates }) {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -27,25 +25,23 @@ export default function StackedBarChart() {
     Legend
   );
 
-  const labels = generateDateArray();
-
   const tasks = useSelector((state) => state.tasks.allTasks);
-  const datasets = tasks.map(({ name, timeSpent }) => ({
+  const datasets = tasks.map(({ name, timeSpent }, index) => ({
     label: name,
-    data: labels.map((date) => {
+    data: dates.map((date) => {
       const ifTimeSpentOnDate = timeSpent.find(
         ({ date: DATE }) => DATE === date
       );
 
-      if (giveMaxY(tasks, labels).unit === "in hrs") {
+      if (giveMaxY(tasks, dates).unit === "in hrs") {
         return ifTimeSpentOnDate ? secsToHrs(ifTimeSpentOnDate.elapsedTime) : 0;
-      } else if (giveMaxY(tasks, labels).unit === "in mins") {
+      } else if (giveMaxY(tasks, dates).unit === "in mins") {
         return ifTimeSpentOnDate ? ifTimeSpentOnDate.elapsedTime / 60 : 0;
       } else {
         return ifTimeSpentOnDate ? ifTimeSpentOnDate.elapsedTime : 0;
       }
     }),
-    backgroundColor: generateRandomColor(),
+    backgroundColor: colors[index],
   }));
 
   const options = {
@@ -71,38 +67,23 @@ export default function StackedBarChart() {
       y: {
         stacked: true,
         beginAtZero: true,
-        max: giveMaxY(tasks, labels).value,
+        max: giveMaxY(tasks, dates).value,
         title: {
           display: true,
-          text: `Elapsed time (${giveMaxY(tasks, labels).unit})`,
+          text: `Elapsed time (${giveMaxY(tasks, dates).unit})`,
         },
       },
     },
   };
 
   const data = {
-    labels,
+    labels: dates,
     datasets,
   };
-
-  const legendHtml = datasets.map((dataset, index) => {
-    return dataset.data.reduce((acc, curr) => acc + curr, 0) ? (
-      <div className="legend" key={index}>
-        <div
-          className="legend-color"
-          style={{
-            backgroundColor: dataset.backgroundColor,
-          }}
-        ></div>
-        <span>{dataset.label}</span>
-      </div>
-    ) : null;
-  });
 
   return (
     <div className="stacked-bar-chart">
       <Bar options={options} data={data} className="chart" />
-      {/* <div className="legends-outer">{legendHtml}</div> */}
     </div>
   );
 }

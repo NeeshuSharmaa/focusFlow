@@ -1,13 +1,14 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import { doughnutHelpers } from "./HelperFuncs";
+import { doughnutHelpers } from "./ChartHelper";
 import { useSelector } from "react-redux";
+import "./Styles.css";
 
-export function DoughnutChart() {
+export function DoughnutChart({ colors, dates }) {
   ChartJS.register(ArcElement, Tooltip, Legend);
   const tasks = useSelector((state) => state.tasks.allTasks);
 
-  const doughnut = doughnutHelpers(tasks);
+  const doughnut = doughnutHelpers(tasks, dates);
 
   const options = {
     plugins: {
@@ -20,7 +21,7 @@ export function DoughnutChart() {
       },
     },
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
   };
 
   const data = {
@@ -28,15 +29,16 @@ export function DoughnutChart() {
     datasets: [
       {
         data: doughnut.dataForDatasets,
-        backgroundColor: doughnut.colorsForArcs,
-        borderColor: doughnut.colorsForArcs,
+        backgroundColor: colors,
+        borderColor: colors,
         borderWidth: 1,
       },
     ],
   };
+
   return (
-    <div style={{ width: "100%" }}>
-      <Doughnut data={data} options={options} />
+    <div className="d-chart">
+      <Doughnut data={data} options={options} className="chart" />
     </div>
   );
 }

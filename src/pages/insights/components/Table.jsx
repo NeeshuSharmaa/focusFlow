@@ -1,76 +1,77 @@
-import { useDispatch, useSelector } from "react-redux";
-import "./Charts.css";
+import { useSelector } from "react-redux";
+
 import {
   filterByPriority_I,
   filterBySearch_I,
   filterByStatus_I,
   removeFilters_I,
+  sort_I,
 } from "../../../features/filterSlice";
 import { filteredTasks } from "../../../features/FilterLogic";
+import Filters from "../../../components/filters/Filters";
+
+import "./Styles.css";
+import { getTimeHHMMSS } from "../../../features/TimeUtils";
+import { Flex } from "@chakra-ui/react";
+import { useState } from "react";
+import PaginateComponent, {
+  paginate,
+} from "../../../components/pagination/paginate";
+// import { paginate } from "../../../components/pagination/paginate";
 
 export default function Table() {
   const tasks = useSelector((state) => state.tasks.allTasks);
   const filters = useSelector((state) => state.filters.insightFilters);
-  const dispatch = useDispatch();
-  const tasksToDisplay = filteredTasks(tasks, filters);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const { currentPageData, pageCount, handlePageClick } = paginate(
+    tasks,
+    setCurrentPage,
+    currentPage
+  );
+  const tasksToDisplay = filteredTasks(currentPageData, filters);
+
+  const filterActions = {
+    search: filterBySearch_I,
+    status: filterByStatus_I,
+    priority: filterByPriority_I,
+    removeFilters: removeFilters_I,
+    sort: sort_I,
+  };
+
+  const totalTime = (timeArr) =>
+    timeArr.reduce((acc, curr) => acc + curr.elapsedTime, 0);
 
   return (
-    <div className="table">
-      <div className="filters">
-        <input
-          value={filters.search}
-          type="text"
-          placeholder="search tasks via name or due date"
-          onChange={(e) =>
-            dispatch(filterBySearch_I({ search: e.target.value }))
-          }
-        />
-        <select
-          value={filters.status}
-          onChange={(e) =>
-            dispatch(filterByStatus_I({ status: e.target.value }))
-          }
-        >
-          <option value="" disabled>
-            Status
-          </option>
-          <option value="completed">Completed</option>
-          <option value="pending">Pending</option>
-          <option value="both">Both</option>
-        </select>
-        <select
-          value={filters.priority}
-          onChange={(e) =>
-            dispatch(filterByPriority_I({ priority: e.target.value }))
-          }
-        >
-          <option value="" disabled>
-            Priority
-          </option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low"> Low</option>
-          <option value="none">None</option>
-        </select>
-        <span onClick={() => dispatch(removeFilters_I())}>Clear filters</span>
-      </div>
+    <Flex direction="column" gap="2rem" justifyContent="center">
+      <Filters filters={filters} filterActions={filterActions} />
 
       <table>
-        <tr>
-          <th>Title</th>
-          <th>Duration</th>
-        </tr>
-
-        {tasksToDisplay?.map(({ id, name, timeSpent }) => (
-          <tr key={id}>
-            <td>{name}</td>
-            <td>
-              {" "}
-              {timeSpent.reduce((acc, { elapsedTime }) => acc + elapsedTime, 0)}
-            </td>
+        <thead>
+          <tr>
+            <th>Tasks</th>
+            <th>Due Date</th>
+            <th>Priority</th>
+            <th>Duration</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {tasksToDisplay?.map(({ id, name, dueDate, priority, timeSpent }) => (
+            <tr key={id}>
+              <td>{name}</td>
+              <td>{dueDate}</td>
+              <td>{priority}</td>
+              <td>{getTimeHHMMSS(totalTime(timeSpent))}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
-    </div>
+
+      <PaginateComponent
+        currentPageData={currentPageData}
+        pageCount={pageCount}
+        handlePageClick={handlePageClick}
+      />
+    </Flex>
   );
 }
