@@ -1,8 +1,10 @@
 import { getTimeHHMMSS, getTimeMMSS } from "../../../features/TimeUtils";
 
-export default function SummaryOnHome({ tasks }) {
-  const uncompletedTasks = tasks?.filter(({ completed }) => !completed);
-  const completedTasks = tasks?.filter(({ completed }) => completed);
+export default function SummaryOnHome({
+  tasks,
+  uncompletedTasks,
+  completedTasks,
+}) {
   const elapsedTime = tasks?.reduce(
     (totalTime, task) =>
       totalTime +
