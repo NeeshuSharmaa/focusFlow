@@ -105,6 +105,16 @@ export default function Home() {
           </div>
         </div>
       )}
+      {tasksToDisplay.length === 0 && (
+        <div className="no-tasks">
+          <img src="no-tasks.png" alt="no-tasks-illustration" />
+          <div>
+            <span>No tasks</span>
+            <small>Oops! No Tasks To Display</small>
+          </div>
+        </div>
+      )}
+
       <TaskModal
         setShowTaskModal={setShowTaskModal}
         showTaskModal={showTaskModal}
