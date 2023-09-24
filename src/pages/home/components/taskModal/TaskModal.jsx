@@ -19,7 +19,7 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
   const handleFormSubmit = (e) => {
     if (newTask.name && newTask.dueDate && newTask.priority) {
       e.preventDefault();
-      console.log(newTask);
+
       dispatch(createdNewTask({ task: { ...newTask, id: Date.now() } }));
       setNewTask({
         name: "",

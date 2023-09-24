@@ -56,11 +56,7 @@ export default function Filters({
 
   return (
     <Flex align="center" gap="1.25rem">
-      <InputGroup
-        width="40%"
-        value={filters.search}
-        onChange={(e) => console.log(e.target.value)}
-      >
+      <InputGroup width="40%" value={filters.search}>
         <InputLeftElement pointerEvents="none">
           <SearchIcon color="gray.400" />
         </InputLeftElement>
