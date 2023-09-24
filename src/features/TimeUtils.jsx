@@ -16,8 +16,9 @@ export const getTimeHHMMSS = (time) => {
 export const getDateInFormat = (timestamp) => {
   const currentDate = new Date(timestamp);
   const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
+  const month = currentDate.getMonth() + 1;
   const date = currentDate.getDate();
+
   return `${year}-${month < 10 ? "0" + month : month}-${
     date < 10 ? "0" + date : date
   }`;
