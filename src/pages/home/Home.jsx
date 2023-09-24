@@ -51,6 +51,8 @@ export default function Home() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, []);
 
+  console.log(tasksToDisplay.length > tasksPerPage);
+
   return (
     <div className="home">
       <SummaryOnHome
@@ -71,22 +73,26 @@ export default function Home() {
           {tasksToDisplay?.map((task) => (
             <Task key={task.id} {...task} />
           ))}
-          <PaginateComponent
-            currentPageData={currentPageData}
-            pageCount={pageCount}
-            handlePageClick={handlePageClick}
-          />
-          <span
-            className="completed-tasks"
-            onClick={() => setShowCompletedTasks((show) => !show)}
-          >
-            <small>
-              {showCompletedTasks ? "Hide" : "Show"} completed tasks{" "}
-            </small>
-            <FontAwesomeIcon
-              icon={showCompletedTasks ? faCaretUp : faCaretDown}
+          {pageCount > 1 && (
+            <PaginateComponent
+              currentPageData={currentPageData}
+              pageCount={pageCount}
+              handlePageClick={handlePageClick}
             />
-          </span>
+          )}
+          {Boolean(completedTasks.length) && (
+            <span
+              className="completed-tasks"
+              onClick={() => setShowCompletedTasks((show) => !show)}
+            >
+              <small>
+                {showCompletedTasks ? "Hide" : "Show"} completed tasks{" "}
+              </small>
+              <FontAwesomeIcon
+                icon={showCompletedTasks ? faCaretUp : faCaretDown}
+              />
+            </span>
+          )}
 
           {showCompletedTasks &&
             completedTasks?.map((task) => <Task key={task.id} {...task} />)}

@@ -17,7 +17,6 @@ import { useState } from "react";
 import PaginateComponent, {
   paginate,
 } from "../../../components/pagination/Paginate";
-// import { paginate } from "../../../components/pagination/paginate";
 
 export default function Table() {
   const tasks = useSelector((state) => state.tasks.allTasks);
@@ -67,11 +66,13 @@ export default function Table() {
         </tbody>
       </table>
 
-      <PaginateComponent
-        currentPageData={currentPageData}
-        pageCount={pageCount}
-        handlePageClick={handlePageClick}
-      />
+      {pageCount > 1 && (
+        <PaginateComponent
+          currentPageData={currentPageData}
+          pageCount={pageCount}
+          handlePageClick={handlePageClick}
+        />
+      )}
     </Flex>
   );
 }
