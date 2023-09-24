@@ -3,12 +3,12 @@ import {
   setBreakLength,
   setPomodoroLength,
 } from "../../features/settingsSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVolumeLow } from "@fortawesome/free-solid-svg-icons";
+
 import "./Settings.css";
+import { Flex, Heading, Select } from "@chakra-ui/react";
 
 export default function Settings() {
-  const pomodoroLengths = [1, 15, 25, 30, 40, 45, 50];
+  const pomodoroLengths = [1, 15, 25, 30, 45, 60];
   const breakLengths = [5, 7, 10, 15];
 
   const settings = useSelector((state) => state.settings);
@@ -16,25 +16,29 @@ export default function Settings() {
 
   const SettingDropDown = ({ settingName, value, action, optionArr }) => {
     return (
-      <div>
-        <h3>{settingName}</h3>
-        <select
+      <Flex direction="column" gap="1.25rem">
+        <Heading as="h3" fontSize="1.25rem" color="gray.600">
+          {settingName}
+        </Heading>
+        <Select
+          width="40%"
           value={value}
           onChange={(e) => dispatch(action(e.target.value))}
+          backgroundColor="white"
+          borderColor="gray.300"
         >
-          <option disabled>Break Length</option>
           {optionArr.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
           ))}
-        </select>
-      </div>
+        </Select>
+      </Flex>
     );
   };
 
   return (
-    <div>
+    <Flex direction="column" gap="2rem" padding="2rem">
       <SettingDropDown
         settingName={"Pomodoro Length"}
         value={settings.pomodoroLength}
@@ -47,6 +51,6 @@ export default function Settings() {
         action={setBreakLength}
         optionArr={breakLengths}
       />
-    </div>
+    </Flex>
   );
 }
