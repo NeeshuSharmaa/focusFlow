@@ -45,7 +45,7 @@ export default function Button({
             onClick={() => setTimerIsActive((active) => !active)}
           >
             <FontAwesomeIcon icon={faCirclePause} className="fa-icon" />
-            <span>{isPomodoro ? "Take a break" : "Pause"}</span>
+            <span>Pause</span>
           </button>
           <button className="secondary-btn" onClick={stopTimer}>
             <FontAwesomeIcon icon={faCircleStop} className="fa-icon" />
