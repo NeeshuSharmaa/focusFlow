@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from "@fortawesome/free-regular-svg-icons";
+
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import Button from "./Button";
-import StopTimerModal from "./stopTimerModal";
+import StopTimerModal from "./StopTimerModal";
 import { getTimeHHMMSS } from "../../features/TimeUtils";
 import TaskInfo from "./TaskInfo";
 
