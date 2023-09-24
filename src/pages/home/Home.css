@@ -39,6 +39,7 @@
   height: 100%;
 }
 .completed-tasks {
+  padding-top: 1rem;
   align-self: center;
   color: var(--primary-black);
   cursor: pointer;
