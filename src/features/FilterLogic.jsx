@@ -1,4 +1,4 @@
-export const filteredTasks = (tasks, filters) => {
+export const filteredTasks = (tasks, filters, location) => {
   const filterBySearch = (tasks) => {
     const noWhiteSpace = (string) =>
       [...string].reduce((acc, curr) => (curr === " " ? acc : acc + curr), "");
@@ -26,12 +26,46 @@ export const filteredTasks = (tasks, filters) => {
     }
   };
 
-  const filterByPriority = (tasks) =>
-    filters.priority
-      ? tasks?.filter(({ priority }) => priority === filters.priority)
-      : tasks;
+  const filterByPriority = (tasks) => {
+    const selectedPriority = Object.keys(filters.priority).filter(
+      (p) => filters.priority[p]
+    );
 
-  const filterFuncs = [filterBySearch, filterByStatus, filterByPriority];
+    return selectedPriority.length
+      ? tasks?.filter(({ priority }) => selectedPriority.includes(priority))
+      : tasks;
+  };
+
+  const sort = (tasks) => {
+    const priority = { high: 1, medium: 2, low: 3, none: 4 };
+    const totalTimeSpent = (timeArr) =>
+      timeArr.reduce((acc, curr) => acc + curr.elapsedTime, 0);
+
+    if (filters.sort === "phl")
+      return [...tasks].sort(
+        ({ priority: A }, { priority: B }) => priority[A] - priority[B]
+      );
+    else if (filters.sort === "plh")
+      return [...tasks].sort(
+        ({ priority: A }, { priority: B }) => priority[B] - priority[A]
+      );
+    else if (filters.sort === "thl")
+      return [...tasks].sort(
+        ({ timeSpent: A }, { timeSpent: B }) =>
+          totalTimeSpent(B) - totalTimeSpent(A)
+      );
+    else if (filters.sort === "tlh")
+      return [...tasks].sort(
+        ({ timeSpent: A }, { timeSpent: B }) =>
+          totalTimeSpent(A) - totalTimeSpent(B)
+      );
+    else return tasks;
+  };
+
+  const filterFuncs =
+    location === "/"
+      ? [filterBySearch, filterByPriority, sort]
+      : [filterBySearch, filterByStatus, filterByPriority, sort];
 
   const giveFilteredTasks = filterFuncs.reduce(
     (tasksArr, currFunc) => currFunc(tasksArr),
