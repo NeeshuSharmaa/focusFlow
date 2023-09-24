@@ -105,7 +105,7 @@ export default function Home() {
           </div>
         </div>
       )}
-      {tasksToDisplay.length === 0 && (
+      {tasks.length !== 0 && tasksToDisplay.length === 0 && (
         <div className="no-tasks">
           <img src="no-tasks.png" alt="no-tasks-illustration" />
           <div>
