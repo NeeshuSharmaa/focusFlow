@@ -22,7 +22,7 @@ import { filteredTasks } from "../../features/FilterLogic";
 import Filters from "../../components/filters/Filters";
 import PaginateComponent, {
   paginate,
-} from "../../components/pagination/paginate";
+} from "../../components/pagination/Paginate";
 
 export default function Home() {
   const [showTaskModal, setShowTaskModal] = useState(false);

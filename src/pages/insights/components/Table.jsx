@@ -16,7 +16,7 @@ import { Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import PaginateComponent, {
   paginate,
-} from "../../../components/pagination/paginate";
+} from "../../../components/pagination/Paginate";
 // import { paginate } from "../../../components/pagination/paginate";
 
 export default function Table() {
