@@ -51,8 +51,6 @@ export default function Home() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, []);
 
-  console.log(tasksToDisplay.length > tasksPerPage);
-
   return (
     <div className="home">
       <SummaryOnHome
