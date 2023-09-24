@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getDateInFormat } from "./TimeUtils";
+import { tasks } from "../db/tasks";
 
 const initialState = {
-  allTasks: JSON.parse(localStorage.getItem("tasks")) || [],
+  allTasks: JSON.parse(localStorage.getItem("tasks")) || [...tasks],
   isPomodoro: JSON.parse(localStorage.getItem("pomodoroMode")) || false,
 };
-console.log(initialState.isPomodoro);
+
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
