@@ -6,17 +6,12 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import Button from "./Button";
-import StopTimerModal from "./stopTimerModal";
+import StopTimerModal from "./StopTimerModal";
 import { getTimeMMSS } from "../../features/TimeUtils";
 import PomoBreakModal from "./PomoBreakModal";
 import useSound from "use-sound";
 import timesUpTimer from "../../sound/timesUp.mp3";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCaretDown,
-  faCaretUp,
-  faFlag,
-} from "@fortawesome/free-solid-svg-icons";
+
 import TaskInfo from "./TaskInfo";
 
 export default function Pomodoro() {
