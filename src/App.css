@@ -12,7 +12,7 @@
   --high-priority: rgb(235, 47, 75);
   --medium-priority: rgb(251 180 46);
   --low-priority: rgb(100, 206, 100);
-
+  --shadow-gray: #e9e9e9;
   font-family: "Poppins", sans-serif;
 }
 a {
@@ -55,13 +55,12 @@ nav {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.8rem 2rem;
+  padding: 0.8rem 1.5rem;
   border: 0;
   border-radius: 1.5rem;
   background-color: var(--primary-blue);
   color: white;
   width: max-content;
-  /* align-self: flex-end; */
 }
 .secondary-btn {
   display: flex;
@@ -147,8 +146,4 @@ nav {
 }
 .black {
   color: var(--primary-black);
-}
-option {
-  display: flex;
-  gap: 1rem;
 }
