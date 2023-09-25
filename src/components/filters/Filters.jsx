@@ -142,6 +142,7 @@ export default function Filters({
             <Flex sx={dropDownMain}>
               {checkbox.map(({ name, value }) => (
                 <Checkbox
+                  isChecked={filters.priority[value]}
                   key={value}
                   value={value}
                   colorScheme="cyan"
