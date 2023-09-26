@@ -9,7 +9,7 @@ import { Flex, Heading, Select } from "@chakra-ui/react";
 
 export default function Settings() {
   const pomodoroLengths = [1, 15, 25, 30, 45, 60];
-  const breakLengths = [5, 7, 10, 15];
+  const breakLengths = [1, 5, 7, 10, 15];
 
   const settings = useSelector((state) => state.settings);
   const dispatch = useDispatch();
