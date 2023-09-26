@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="app">
       <nav className="logo">
-        <img src="/public/F.png" alt="logo" />
+        <img src="/F.png" alt="logo" />
         <h2>Focus Flow</h2>
       </nav>
       <div className="main">
