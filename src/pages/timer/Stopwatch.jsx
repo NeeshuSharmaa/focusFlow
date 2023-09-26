@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import Button from "./Button";
-import StopTimerModal from "./StopTimerModal";
 import { getTimeHHMMSS } from "../../features/TimeUtils";
-import TaskInfo from "./TaskInfo";
+
+import Button from "./components/Button";
+import StopTimerModal from "./components/StopTimerModal";
+import TaskInfo from "./components/TaskInfo";
+import "./Timer.css";
 
 export default function Stopwatch() {
   const { id: ID } = useParams();

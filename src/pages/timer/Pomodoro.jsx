@@ -1,18 +1,17 @@
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
-import "./Timer.css";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-
-import Button from "./Button";
-import StopTimerModal from "./StopTimerModal";
 import { getTimeMMSS } from "../../features/TimeUtils";
-import PomoBreakModal from "./PomoBreakModal";
+import "react-circular-progressbar/dist/styles.css";
 import useSound from "use-sound";
-import timesUpTimer from "../../sound/timesUp.mp3";
 
-import TaskInfo from "./TaskInfo";
+import Button from "./components/Button";
+import StopTimerModal from "./components/StopTimerModal";
+import PomoBreakModal from "./components/PomoBreakModal";
+import timesUpTimer from "../../sound/timesUp.mp3";
+import TaskInfo from "./components/TaskInfo";
+import "./Timer.css";
 
 export default function Pomodoro() {
   const { id: ID } = useParams();

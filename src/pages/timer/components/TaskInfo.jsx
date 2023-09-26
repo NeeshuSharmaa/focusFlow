@@ -1,10 +1,5 @@
-import {
-  faCaretDown,
-  faCaretUp,
-  faFlag,
-} from "@fortawesome/free-solid-svg-icons";
+import { faFlag } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 
 export default function TaskInfo({ task: { name, dueDate, priority } }) {
   const priorityColor = () => {

@@ -6,9 +6,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { durationSaved, taskCompleted } from "../../features/tasksSlice";
-import pauseTimer from "../../sound/pauseTimer.mp3";
 import useSound from "use-sound";
+
+import { durationSaved, taskCompleted } from "../../../features/tasksSlice";
+import pauseTimer from "../../../sound/pauseTimer.mp3";
 
 export default function StopTimerModal({
   time,

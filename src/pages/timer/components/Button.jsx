@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useSelector } from "react-redux";
 import useSound from "use-sound";
-import startTimer from "../../sound/startTimer.mp3";
+import startTimer from "../../../sound/startTimer.mp3";
 
 export default function Button({
   timerIsActive,
