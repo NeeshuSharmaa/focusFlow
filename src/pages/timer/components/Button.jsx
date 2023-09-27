@@ -2,35 +2,61 @@ import {
   faCirclePlay,
   faCircleStop,
 } from "@fortawesome/free-regular-svg-icons";
-import { faCirclePause } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCirclePause,
+  faClockRotateLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useSelector } from "react-redux";
 import useSound from "use-sound";
 import startTimer from "../../../sound/startTimer.mp3";
+import pauseTimer from "../../../sound/pauseTimer.mp3";
 
 export default function Button({
-  timerIsActive,
-  setTimerIsActive,
+  activeTimer,
+  initialFocusTime,
+
+  initialStopwatchTime,
   time,
   setTime,
-  initialTime,
-  setStopActive,
+  setActiveTimer,
+  setModal,
 }) {
   const [startSound] = useSound(startTimer, { volume: 5 });
+  const [pauseSound] = useSound(pauseTimer, { volume: 5 });
 
   const isPomodoro = useSelector((state) => state.tasks.isPomodoro);
-  const stopTimer = () => {
-    setStopActive(true);
-    setTimerIsActive(false);
+
+  const handleStop = () => {
+    if (activeTimer.focus && !activeTimer.break) {
+      setModal((modals) => ({ ...modals, focusStop: true }));
+      setActiveTimer((timer) => ({ ...timer, focus: false }));
+    } else if (activeTimer.break && !activeTimer.focus) {
+      setModal((modals) => ({ ...modals, breakStop: true }));
+      setActiveTimer((timer) => ({ ...timer, break: false }));
+    }
   };
+  const handlePause = () => {
+    setActiveTimer(false);
+  };
+  const handleContinue = () => {
+    setActiveTimer(true);
+  };
+  const handleReset = () => {
+    setActiveTimer(false);
+    setTime(initialStopwatchTime);
+    pauseSound();
+  };
+
   return (
     <>
-      {!timerIsActive && time === initialTime && (
+      {((isPomodoro && !activeTimer.focus && time === initialFocusTime) ||
+        (!isPomodoro && !activeTimer && time === initialStopwatchTime)) && (
         <button
           className="primary-btn"
           onClick={() => {
-            setTimerIsActive((active) => !active);
+            setActiveTimer((timer) => ({ ...timer, focus: true }));
             startSound();
           }}
         >
@@ -38,35 +64,32 @@ export default function Button({
           <span>Start to focus</span>
         </button>
       )}
-      {timerIsActive && (
-        <div className="flex-row-2">
-          <button
-            className="primary-btn"
-            onClick={() => setTimerIsActive((active) => !active)}
-          >
-            <FontAwesomeIcon icon={faCirclePause} className="fa-icon" />
-            <span>Pause</span>
-          </button>
-          <button className="secondary-btn" onClick={stopTimer}>
-            <FontAwesomeIcon icon={faCircleStop} className="fa-icon" />
-            <span>Stop</span>
-          </button>
-        </div>
-      )}
 
-      {!timerIsActive && time !== initialTime && (
+      {isPomodoro && (activeTimer.focus || activeTimer.break) && (
+        <button
+          className={activeTimer.focus ? "primary-btn" : "primary-btn gray-bg"}
+          onClick={handleStop}
+        >
+          <FontAwesomeIcon icon={faCircleStop} className="fa-icon" />
+          <span>Stop</span>
+        </button>
+      )}
+      {!isPomodoro && time !== initialStopwatchTime && (
         <div className="flex-row-2">
           <button
             className="primary-btn"
-            onClick={() => setTimerIsActive((active) => !active)}
+            onClick={activeTimer ? handlePause : handleContinue}
           >
-            {" "}
-            <FontAwesomeIcon icon={faCirclePlay} className="fa-icon" />
-            <span>Continue</span>
+            <FontAwesomeIcon
+              icon={activeTimer ? faCircleStop : faCirclePlay}
+              className="fa-icon"
+            />
+            <span>{activeTimer ? "Pause" : "Continue"}</span>
           </button>
-          <button className="secondary-btn" onClick={stopTimer}>
-            <FontAwesomeIcon icon={faCircleStop} className="fa-icon" />
-            <span>Stop</span>
+
+          <button className="primary-btn" onClick={handleReset}>
+            <FontAwesomeIcon icon={faClockRotateLeft} className="fa-icon" />
+            <span>Reset</span>
           </button>
         </div>
       )}
