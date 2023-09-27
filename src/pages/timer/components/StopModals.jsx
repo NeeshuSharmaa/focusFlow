@@ -22,6 +22,7 @@ export function StopFocusModal({
   setTime,
   setActiveTimer,
   setModal,
+  setFocusBar,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ export function StopFocusModal({
     setModal((modals) => ({ ...modals, focusStop: false }));
     setActiveTimer((timer) => ({ ...timer, break: true }));
     setTime(initialBreakTime);
+    setFocusBar(false);
   };
   return (
     <div className="modal">
@@ -89,6 +91,7 @@ export function StopBreakModal({
   setModal,
   setTime,
   initialFocusTime,
+  setFocusBar,
 }) {
   const handleOutsideClick = () => {
     setActiveTimer((timer) => ({ ...timer, break: true }));
@@ -99,6 +102,7 @@ export function StopBreakModal({
     setActiveTimer((timer) => ({ ...timer, focus: true }));
     setTime(initialFocusTime);
     setModal((modals) => ({ ...modals, breakStop: false }));
+    setFocusBar(true);
   };
   const handleContinue = () => {
     setActiveTimer((timer) => ({ ...timer, break: true }));

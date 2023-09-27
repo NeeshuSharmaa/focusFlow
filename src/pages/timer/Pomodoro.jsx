@@ -42,7 +42,7 @@ export default function Pomodoro() {
   });
 
   const [time, setTime] = useState(focusLength * 60);
-
+  const [focusBar, setFocusBar] = useState(true);
   const [timeUpSound] = useSound(timesUpTimer, { volumne: 5 });
 
   useEffect(() => {
@@ -82,10 +82,10 @@ export default function Pomodoro() {
   }, [time, activeTimer]);
 
   const percentage = (time) =>
-    (time / ((activeTimer.focus ? focusLength : breakLength) * 60)) * 100;
+    (time / ((focusBar ? focusLength : breakLength) * 60)) * 100;
 
   const PomodoroDisplay = () => {
-    const barColor = activeTimer.focus
+    const barColor = focusBar
       ? "var(--primary-blue)"
       : "var(--secondary-black)";
     return (
@@ -109,6 +109,7 @@ export default function Pomodoro() {
       <div className="timer">
         <PomodoroDisplay />
         <Button
+          focusBar={focusBar}
           initialFocusTime={focusLength * 60}
           initialBreakTime={breakLength * 60}
           activeTimer={activeTimer}
@@ -128,15 +129,17 @@ export default function Pomodoro() {
           setModal={setModal}
           setActiveTimer={setActiveTimer}
           setTime={setTime}
+          setFocusBar={setFocusBar}
         />
       )}
       {modal.focusEnd && (
         <PomoEndModal
+          initialFocusTime={focusLength * 60}
+          breakLength={breakLength}
           setActiveTimer={setActiveTimer}
           setModal={setModal}
           setTime={setTime}
-          initialFocusTime={focusLength * 60}
-          breakLength={breakLength}
+          setFocusBar={setFocusBar}
         />
       )}
       {modal.breakEnd && (
@@ -146,15 +149,17 @@ export default function Pomodoro() {
           setTime={setTime}
           initialFocusTime={focusLength * 60}
           initialBreakTime={breakLength * 60}
+          setFocusBar={setFocusBar}
         />
       )}
 
       {modal.breakStop && (
         <StopBreakModal
+          initialFocusTime={focusLength * 60}
           setActiveTimer={setActiveTimer}
           setModal={setModal}
           setTime={setTime}
-          initialFocusTime={focusLength * 60}
+          setFocusBar={setFocusBar}
         />
       )}
     </div>

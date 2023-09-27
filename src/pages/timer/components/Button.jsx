@@ -14,6 +14,7 @@ import startTimer from "../../../sound/startTimer.mp3";
 import pauseTimer from "../../../sound/pauseTimer.mp3";
 
 export default function Button({
+  focusBar,
   activeTimer,
   initialFocusTime,
 
@@ -67,7 +68,7 @@ export default function Button({
 
       {isPomodoro && (activeTimer.focus || activeTimer.break) && (
         <button
-          className={activeTimer.focus ? "primary-btn" : "primary-btn gray-bg"}
+          className={focusBar ? "primary-btn" : "primary-btn gray-bg"}
           onClick={handleStop}
         >
           <FontAwesomeIcon icon={faCircleStop} className="fa-icon" />

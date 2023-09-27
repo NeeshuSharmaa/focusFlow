@@ -21,6 +21,7 @@ export function PomoEndModal({
   initialFocusTime,
 
   breakLength,
+  setFocusBar,
 }) {
   const initialBreakTime = breakLength * 60;
   const [startSound] = useSound(startTimer, { volume: 5 });
@@ -29,11 +30,14 @@ export function PomoEndModal({
     setModal((modals) => ({ ...modals, focusEnd: false }));
     setActiveTimer((timer) => ({ ...timer, break: true }));
     setTime(initialBreakTime);
+    setFocusBar(false);
   };
   const handleStartPomo = () => {
     setModal((modals) => ({ ...modals, focusEnd: false }));
     setActiveTimer((timer) => ({ ...timer, focus: true }));
     setTime(initialFocusTime);
+    setFocusBar(true);
+
     startSound();
   };
   return (
@@ -65,6 +69,7 @@ export function BreakEndModal({
   setTime,
   initialFocusTime,
   initialBreakTime,
+  setFocusBar,
 }) {
   const navigate = useNavigate();
   const [startSound] = useSound(startTimer, { volume: 5 });
@@ -72,11 +77,14 @@ export function BreakEndModal({
     setModal((modals) => ({ ...modals, breakEnd: false }));
     setActiveTimer((timer) => ({ ...timer, break: true }));
     setTime(initialBreakTime);
+
+    setFocusBar(false);
   };
   const handleStartPomo = () => {
     setModal((modals) => ({ ...modals, breakEnd: false }));
     setActiveTimer((timer) => ({ ...timer, focus: true }));
     setTime(initialFocusTime);
+    setFocusBar(true);
     startSound();
   };
 
