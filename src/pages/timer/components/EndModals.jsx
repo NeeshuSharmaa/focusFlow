@@ -12,6 +12,7 @@ import useSound from "use-sound";
 import startTimer from "../../../sound/startTimer.mp3";
 
 import timesUp from "../../../sound/timesUp.mp3";
+import { toast } from "react-toastify";
 
 export function PomoEndModal({
   setActiveTimer,
@@ -77,8 +78,10 @@ export function BreakEndModal({
     setModal((modals) => ({ ...modals, breakEnd: false }));
     setActiveTimer((timer) => ({ ...timer, break: true }));
     setTime(initialBreakTime);
-
     setFocusBar(false);
+    toast.success(`${initialBreakTime / 60} mins break has started`, {
+      className: "toast",
+    });
   };
   const handleStartPomo = () => {
     setModal((modals) => ({ ...modals, breakEnd: false }));
@@ -86,6 +89,9 @@ export function BreakEndModal({
     setTime(initialFocusTime);
     setFocusBar(true);
     startSound();
+    toast.success(`${initialFocusTime / 60} mins focus timer has started`, {
+      className: "toast",
+    });
   };
 
   const handleExit = () => {

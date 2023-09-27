@@ -116,6 +116,7 @@ nav {
   justify-content: space-between;
 }
 .toast {
+  top: 40px;
   border-radius: 0.2rem;
 }
 

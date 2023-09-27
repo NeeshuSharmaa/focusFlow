@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { durationSaved, taskCompleted } from "../../../features/tasksSlice";
 import useSound from "use-sound";
 import pauseTimer from "../../../sound/pauseTimer.mp3";
+import { toast } from "react-toastify";
 
 export function StopFocusModal({
   taskId,
@@ -52,6 +53,9 @@ export function StopFocusModal({
     setActiveTimer((timer) => ({ ...timer, break: true }));
     setTime(initialBreakTime);
     setFocusBar(false);
+    toast.success(`${initialBreakTime / 60} mins break has started`, {
+      className: "toast",
+    });
   };
   return (
     <div className="modal">
@@ -67,12 +71,25 @@ export function StopFocusModal({
               noFocusingNow();
 
               dispatch(taskCompleted({ id: taskId }));
+              toast.success(
+                "Your focus time is successfully saved and the task is marked as completed!",
+                {
+                  className: "toast",
+                }
+              );
             }}
           >
             <FontAwesomeIcon icon={faCircleCheck} />
             <span>Yes, I'm done</span>
           </div>
-          <div onClick={noFocusingNow}>
+          <div
+            onClick={() => {
+              noFocusingNow();
+              toast.success("Your focus time is successfully saved!", {
+                className: "toast",
+              });
+            }}
+          >
             <FontAwesomeIcon icon={faClockRotateLeft} />
             <span>No, I'll continue later</span>
           </div>

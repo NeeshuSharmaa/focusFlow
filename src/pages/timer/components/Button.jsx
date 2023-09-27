@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import useSound from "use-sound";
 import startTimer from "../../../sound/startTimer.mp3";
 import pauseTimer from "../../../sound/pauseTimer.mp3";
+import { toast } from "react-toastify";
 
 export default function Button({
   focusBar,
@@ -30,14 +31,18 @@ export default function Button({
   const isPomodoro = useSelector((state) => state.tasks.isPomodoro);
 
   const handleStop = () => {
+    console.log("inside stop", activeTimer.break, activeTimer.focus);
     if (activeTimer.focus && !activeTimer.break) {
+      console.log("inside here 1");
       setModal((modals) => ({ ...modals, focusStop: true }));
       setActiveTimer((timer) => ({ ...timer, focus: false }));
     } else if (activeTimer.break && !activeTimer.focus) {
+      console.log("inside here");
       setModal((modals) => ({ ...modals, breakStop: true }));
       setActiveTimer((timer) => ({ ...timer, break: false }));
     }
   };
+
   const handlePause = () => {
     setActiveTimer(false);
   };
@@ -47,6 +52,9 @@ export default function Button({
   const handleReset = () => {
     setActiveTimer(false);
     setTime(initialStopwatchTime);
+    toast.success(`Your focus time is saved and the timer is reset!`, {
+      className: "toast",
+    });
     pauseSound();
   };
 
@@ -59,6 +67,9 @@ export default function Button({
           onClick={() => {
             setActiveTimer((timer) => ({ ...timer, focus: true }));
             startSound();
+            toast.success("Your focus time has started!", {
+              className: "toast",
+            });
           }}
         >
           <FontAwesomeIcon icon={faCirclePlay} className="fa-icon" />

@@ -9,7 +9,6 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
 
   const [newTask, setNewTask] = useState({
     name: "",
-
     dueDate: "",
     priority: "",
     completed: false,
@@ -21,6 +20,11 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
       e.preventDefault();
 
       dispatch(createdNewTask({ task: { ...newTask, id: Date.now() } }));
+
+      setShowTaskModal(false);
+      toast.success(`${newTask.name} is added to tasks`, {
+        className: "toast",
+      });
       setNewTask({
         name: "",
         description: "",
@@ -29,9 +33,8 @@ export default function TaskModal({ setShowTaskModal, showTaskModal }) {
         completed: false,
         timeSpent: [],
       });
-      setShowTaskModal(false);
     } else {
-      toast.warning("please fill all the input fields", { className: "toast" });
+      toast.warning("Please fill all the input fields", { className: "toast" });
     }
   };
 

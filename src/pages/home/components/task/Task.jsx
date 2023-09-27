@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import { taskCompleted } from "../../../../features/tasksSlice";
+import { toast } from "react-toastify";
 
 export default function Task({ id, name, dueDate, completed, priority }) {
   const [timerModeModal, setTimerModeModal] = useState(false);
@@ -46,7 +47,15 @@ export default function Task({ id, name, dueDate, completed, priority }) {
         <FontAwesomeIcon
           icon={completed ? faCircleCheck : faCircle}
           className={completed ? "gray" : "blue"}
-          onClick={() => dispatch(taskCompleted({ id }))}
+          onClick={() => {
+            dispatch(taskCompleted({ id }));
+            toast.success(
+              `${name} is marked as ${completed ? "pending" : "completed"}!`,
+              {
+                className: "toast",
+              }
+            );
+          }}
         />
         {!completed && (
           <FontAwesomeIcon
