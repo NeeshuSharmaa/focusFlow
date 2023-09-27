@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <div className="home">
       <SummaryOnHome
-        tasks={tasksToDisplay}
+        tasks={tasks}
         uncompletedTasks={uncompletedTasks}
         completedTasks={completedTasks}
       />
