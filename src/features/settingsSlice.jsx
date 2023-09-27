@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   pomodoroLength:
-    JSON.parse(localStorage.getItem("timerSettings"))?.pomoLength || 25,
+    JSON.parse(localStorage.getItem("timerSettings"))?.pomodoroLength || 25,
   breakLength:
     JSON.parse(localStorage.getItem("timerSettings"))?.breakLength || 5,
 };
