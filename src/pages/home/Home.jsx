@@ -23,6 +23,7 @@ import Filters from "../../components/filters/Filters";
 import PaginateComponent, {
   paginate,
 } from "../../components/pagination/Paginate";
+import { CompletedTasks, NoTasks } from "./components/Helpers";
 
 export default function Home() {
   const [showTaskModal, setShowTaskModal] = useState(false);
@@ -66,53 +67,33 @@ export default function Home() {
         </button>
       </div>
 
-      {Boolean(tasks?.length) && Boolean(tasksToDisplay?.length) && (
+      {!!tasks?.length && !!tasksToDisplay?.length && (
         <section className="tasks-list">
           {tasksToDisplay?.map((task) => (
             <Task key={task.id} {...task} />
           ))}
-          {pageCount > 1 && (
-            <PaginateComponent
-              currentPageData={currentPageData}
-              pageCount={pageCount}
-              handlePageClick={handlePageClick}
-            />
-          )}
-          {Boolean(completedTasks.length) && (
-            <span
-              className="completed-tasks"
-              onClick={() => setShowCompletedTasks((show) => !show)}
-            >
-              <small>
-                {showCompletedTasks ? "Hide" : "Show"} completed tasks{" "}
-              </small>
-              <FontAwesomeIcon
-                icon={showCompletedTasks ? faCaretUp : faCaretDown}
-              />
-            </span>
-          )}
-
-          {showCompletedTasks &&
-            completedTasks?.map((task) => <Task key={task.id} {...task} />)}
         </section>
       )}
-      {tasks.length === 0 && (
-        <div className="no-tasks">
-          <img src="no-tasks.png" alt="no-tasks-illustration" />
-          <div>
-            <span>No tasks</span>
-            <small>{`Click the "Create New Task" button to add`}</small>
-          </div>
-        </div>
+      {pageCount > 1 && (
+        <PaginateComponent
+          currentPageData={currentPageData}
+          pageCount={pageCount}
+          handlePageClick={handlePageClick}
+        />
       )}
       {tasks.length !== 0 && tasksToDisplay.length === 0 && (
-        <div className="no-tasks">
-          <img src="no-tasks.png" alt="no-tasks-illustration" />
-          <div>
-            <span>No tasks</span>
-            <small>Oops! No Tasks To Display</small>
-          </div>
-        </div>
+        <NoTasks noTasksInfo="Oops! No Tasks To Display" />
+      )}
+
+      {Boolean(completedTasks.length) && (
+        <CompletedTasks
+          showCompletedTasks={showCompletedTasks}
+          setShowCompletedTasks={setShowCompletedTasks}
+          completedTasks={completedTasks}
+        />
+      )}
+      {tasks.length === 0 && (
+        <NoTasks noTasksInfo={`Click the "Create New Task" button to add`} />
       )}
 
       <TaskModal
