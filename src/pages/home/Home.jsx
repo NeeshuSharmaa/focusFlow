@@ -63,7 +63,7 @@ export default function Home() {
         <Filters filters={filters} filterActions={filterActions} />
         <button className="primary-btn" onClick={() => setShowTaskModal(true)}>
           <FontAwesomeIcon icon={faCirclePlus} className="fa-icon" />
-          <span>Create New Task</span>
+          <span>New Task</span>
         </button>
       </div>
 
