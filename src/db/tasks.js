@@ -48,4 +48,37 @@ export const tasks = [
     ],
     completed: true,
   },
+  {
+    id: Date.now() + 6,
+    name: "Material UI tutorial",
+    priority: "none",
+    dueDate: "05-11-2023",
+    timeSpent: [
+      { date: "2023-09-26", elapsedTime: 8500 },
+      { date: "2023-09-28", elapsedTime: 3500 },
+    ],
+    completed: false,
+  },
+  {
+    id: Date.now() + 7,
+    name: "Barrel Import Blog",
+    priority: "medium",
+    dueDate: "08-11-2023",
+    timeSpent: [
+      { date: "2023-09-28", elapsedTime: 6500 },
+      { date: "2023-09-29", elapsedTime: 8000 },
+    ],
+    completed: false,
+  },
+  {
+    id: Date.now() + 8,
+    name: "CSS Modules",
+    priority: "medium",
+    dueDate: "05-11-2023",
+    timeSpent: [
+      { date: "2023-09-28", elapsedTime: 6500 },
+      { date: "2023-09-29", elapsedTime: 8000 },
+    ],
+    completed: false,
+  },
 ];
