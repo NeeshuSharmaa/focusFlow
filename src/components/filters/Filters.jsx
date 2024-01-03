@@ -1,4 +1,5 @@
 import {
+  faArrowUpWideShort,
   faCaretDown,
   faCaretUp,
   faSort,
@@ -21,7 +22,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { clearFilters, dropDownHead, dropDownMain } from "./Styles";
+import { clearFilters, dropDownHead, dropDownMain, filterText } from "./Styles";
 
 export default function Filters({
   filters,
@@ -63,6 +64,10 @@ export default function Filters({
         <Input
           border="none"
           bgColor="white"
+          fontSize={{
+            base: "0.8rem",
+            md: "1rem",
+          }}
           value={filters.search}
           type="text"
           placeholder="Search"
@@ -121,9 +126,10 @@ export default function Filters({
             }))
           }
         >
-          <Text>Priority</Text>
+          <Text sx={filterText}>Priority</Text>
           <FontAwesomeIcon
-            icon={caretDown ? faCaretDown : faCaretUp} //not working? why
+            icon={faArrowUpWideShort}
+            className={caretDown.priority ? "" : "active-filter"}
           />
         </Flex>
         {!caretDown.priority && (
@@ -131,7 +137,7 @@ export default function Filters({
             <div
               className="outside-click"
               onClick={() =>
-                setCaretDown((prev) => ({
+                setCaretDown(() => ({
                   status: true,
                   sort: true,
                   priority: true,
@@ -168,8 +174,11 @@ export default function Filters({
             }))
           }
         >
-          <Text>Sort</Text>
-          <FontAwesomeIcon icon={faSort} />
+          <Text sx={filterText}>Sort</Text>
+          <FontAwesomeIcon
+            icon={faSort}
+            className={caretDown.sort ? "" : "active-filter"}
+          />
         </Flex>
 
         {!caretDown.sort && (

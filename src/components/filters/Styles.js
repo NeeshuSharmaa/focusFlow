@@ -2,8 +2,11 @@ export const dropDownHead = {
   gap: "1.2rem",
   alignItems: "center",
   color: "rgb(80 93 106)",
-  backgroundColor: "white",
-  padding: "0.5rem 1rem",
+  backgroundColor: {
+    base: "transparent",
+    md: "white",
+  },
+  padding: { base: 0, md: "0.5rem" },
   borderRadius: "0.5rem",
   cursor: "pointer",
 };
@@ -23,9 +26,24 @@ export const dropDownMain = {
 };
 
 export const clearFilters = {
-  backgroundColor: "white",
-  padding: "0.5rem 1rem",
+  backgroundColor: {
+    base: "transparent",
+    md: "white",
+  },
+  padding: { base: 0, md: "0.5rem" },
   borderRadius: "0.5rem",
   color: "gray.500",
   cursor: "pointer",
+  fontSize: {
+    base: "0.8rem",
+    md: "1rem",
+  },
+};
+
+export const filterText = {
+  display: {
+    base: "none",
+    sm: "none",
+    md: "block",
+  },
 };

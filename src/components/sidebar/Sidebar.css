@@ -26,3 +26,35 @@
 
   border-radius: 0.5rem;
 }
+
+@media screen and (max-width: 992px) {
+  .sidebar {
+    position: fixed;
+    top: 25px;
+    left: unset;
+    right: 3rem;
+    width: max-content;
+    flex-direction: row;
+    height: max-content;
+    z-index: 6;
+    padding: 0;
+  }
+  .sidebar-child {
+    height: max-content;
+    padding: 0.8rem 1rem;
+  }
+  .sidebar-child > span {
+    display: none;
+  }
+  .active {
+    color: var(--primary-blue);
+  }
+}
+@media screen and (max-width: 992px) {
+  .sidebar-child {
+    padding: 0.8rem 0;
+  }
+  .active {
+    background-color: transparent;
+  }
+}

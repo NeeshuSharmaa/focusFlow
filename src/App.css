@@ -56,7 +56,7 @@ nav {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem;
   border: 0;
   border-radius: 1.5rem;
   background-color: var(--primary-blue);
@@ -151,4 +151,28 @@ nav {
 }
 .gray-bg {
   background-color: var(--secondary-black);
+}
+.active-filter {
+  color: var(--primary-blue);
+}
+@media screen and (max-width: 992px) {
+  .main {
+    display: flex;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  .primary-btn {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .primary-btn {
+    gap: 0.2rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+  }
+  .primary-btn > .fa-icon {
+    display: none;
+  }
 }
